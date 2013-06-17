@@ -1,8 +1,8 @@
 {
-  "name": "checkbox.js",
+  "name": "checkboxes.js",
   "version": "1.0.0",
-  "homepage": "https://github.com/rmariuzzo/checkbox.js",
-  "keywords": "checkbox",
+  "homepage": "https://github.com/rmariuzzo/checkboxes.js",
+  "keywords": "checkbox checkboxes",
   "license": "MIT",
   "author": "Rubens Mariuzzo <rubens@mariuzzo.com> (http://mariuzzo.com/)",
   "devDependencies": {
