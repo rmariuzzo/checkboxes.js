@@ -1,0 +1,12 @@
+{
+  "name": "checkbox.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/rmariuzzo/checkbox.js",
+  "keywords": "checkbox",
+  "license": "MIT",
+  "author": "Rubens Mariuzzo <rubens@mariuzzo.com> (http://mariuzzo.com/)",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2"
+  }
+}
