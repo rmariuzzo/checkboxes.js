@@ -3,20 +3,47 @@
 <head>
     <meta charset="UTF-8">
 	<title>Checkboxes.js - Demo</title>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-1.10.0.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-    <script src="../build/jquery.checkboxes.min.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <script src="lib/jquery-1.10.1.min.js"></script>
+    <script src="../src/jquery.checkboxes.js"></script>
 </head>
 <body>
-	<h1>Checkboxes demo</h1>
-    <table class="table table-bordered table-striped">
-        <thead>
-    		<tr>
-    			<th><input type="checkbox"></th>
-    			<th>Rows</th>
-    		</tr>
-    	</thead>
+	<h1>checkboxes.js demo</h1>
+    <hr>
+    <h2>Examples</h2>
+    <ul>
+        <li><a href="#example1">Checking all checkboxes</a></li>
+        <li><a href="#example2">Unchecking all checkboxes</a></li>
+        <li><a href="#example3">Toggling all checkboxes's state</a></li>
+        <li><a href="#example4">Allowing selection ranges</a></li>
+    </ul>
+    <hr>
+    <h3 id="example1">Example #1 <small>Check all checkboxes</small></h3>
+    <p><strong>Code:</strong></p>
+    <script>
+        jQuery(function($) {
+    
+            $('#btncheck').on('click', function(e) {
+                $('#table1').checkboxes('check');
+                e.preventDefault();
+            });
+
+        });
+    </script>
+    <pre><code>jQuery(function($) {
+    
+    $('#btncheck').on('click', function(e) {
+        $('#table1').checkboxes('check');
+        e.preventDefault();
+    });
+
+});</code></pre>
+    <p><strong>Result:</strong></p>
+    <div>
+        <a href="#" id="btncheck" class="btn">Check all</a>
+    </div>
+    <br>
+    <table class="table table-bordered table-striped" id="table1">
     	<tbody>
         	<tr>
     			<td><input type="checkbox"></td>
@@ -59,6 +86,144 @@
     			<td>Row 10</td>
     		</tr>
     	</tbody>
+    </table>
+    <h3 id="example2">Example #2 <small>Uncheck all checkboxes</small></h3>
+    <p><strong>Code:</strong></p>
+    <script>
+        jQuery(function($) {
+    
+            $('#btnuncheck').on('click', function(e) {
+                $('#table2').checkboxes('uncheck');
+                e.preventDefault();
+            });
+
+        });
+    </script>
+    <pre><code>jQuery(function($) {
+    
+    $('#btnuncheck').on('click', function(e) {
+        $('#table2').checkboxes('uncheck');
+        e.preventDefault();
+    });
+
+});</code></pre>
+    <p><strong>Result:</strong></p>
+    <div>
+        <a href="#" id="btnuncheck" class="btn">Uncheck all</a>
+    </div>
+    <br>
+    <table class="table table-bordered table-striped" id="table2">
+        <tbody>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 1</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 2</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 3</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 4</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 5</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 6</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 7</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 8</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 9</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 10</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 id="example3">Example #3 <small>Toggle all checkboxes's state</small></h3>
+    <p><strong>Code:</strong></p>
+    <script>
+        jQuery(function($) {
+    
+            $('#btntoggle').on('click', function(e) {
+                $('#table3').checkboxes('toggle');
+                e.preventDefault();
+            });
+
+        });
+    </script>
+    <pre><code>jQuery(function($) {
+    
+    $('#btntoggle').on('click', function(e) {
+        $('#table3').checkboxes('toggle');
+        e.preventDefault();
+    });
+
+});</code></pre>
+    <p><strong>Result:</strong></p>
+    <div>
+        <a href="#" id="btntoggle" class="btn">Toggle all</a>
+    </div>
+    <br>
+    <table class="table table-bordered table-striped" id="table3">
+        <tbody>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 1</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Row 2</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 3</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Row 4</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 5</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Row 6</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 7</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Row 8</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" checked="checked"></td>
+                <td>Row 9</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>Row 10</td>
+            </tr>
+        </tbody>
     </table>
 </body>
 </html>

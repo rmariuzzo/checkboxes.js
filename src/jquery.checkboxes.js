@@ -5,24 +5,49 @@
     /* Checkboxes class definition. */
     //////////////////////////////////
 
-    var Checkboxes = function(context, options) {
-        this.context = context;
-        this.options = options;
+    var defaults = {
+        ranges : true,
+        max : 0
+    };
+
+    var Checkboxes = function($context, options) {
+        this.$context = $context;
+        var options = $.extend({}, options, defaults);
+        var instance = this;
+        if (options.ranges) {
+            this.$context.on('click.checkboxes', ':checkbox', function(e) {
+                var $checkbox = $(e.target);
+                if (e.shiftKey && instance.$last) {
+                    var $checkboxes = instance.$context.find(':checkbox'),
+                        from = $checkboxes.index(instance.$last),
+                        to = $checkboxes.index($checkbox);
+                    if (to > from) {
+                        $checkboxes.slice(from, to).prop('checked', true);
+                    } else {
+                        $checkboxes.slice(to, from).prop('checked', true);
+                    }
+                }
+                instance.$last = $checkbox.is(':checked') ? $checkbox : null;
+            });
+        }
     };
 
     // Check all checkboxes in context.
     Checkboxes.prototype.check = function() {
-
+        this.$context.find(':checkbox').prop('checked', true);
     };
 
     // Uncheck all checkboxes in context.
     Checkboxes.prototype.uncheck = function() {
-
+        this.$context.find(':checkbox').prop('checked', false);
     };
 
     // Toggle the state of all checkboxes in context.
     Checkboxes.prototype.toggle = function() {
-
+        this.$context.find(':checkbox').each(function() {
+            var $checkbox = $(this);
+            $checkbox.prop('checked', ! $checkbox.is(':checked'));
+        });
     };
 
     ///////////////////////////////////
@@ -37,6 +62,9 @@
                 data = $this.data('checkboxes');
             if (!data) {
                 $this.data('checkboxes', (data = new Checkboxes($this, typeof options == 'object' && options)));
+            }
+            if (typeof options === 'string') {
+                data[options]();
             }
         });
     };
@@ -59,8 +87,12 @@
     //////////////////////////
 
     $(document).on('click.checkboxes.data-api', '[data-toggle^=checkboxes]', function(e) {
-        var context = $(e.target);
-        context.checkboxes();
+        var el = $(e.target),
+            href = el.attr('href'),
+            $context = $(el.data('context') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))),
+            action = el.data('action');
+        e.preventDefault();
+        $context.checkboxes(action);
     });
 
 }(window.jQuery);
