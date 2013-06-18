@@ -15,7 +15,7 @@ Installation
 ------------
 
  1. Include jQuery into your HTML page.
- 2. Include [`jQuery.checkboxes.min.js`](master/build/jquery.checkboxes.min.js) into your HTML page, just after jQuery.
+ 2. Include [`jQuery.checkboxes.min.js`](build/jquery.checkboxes.min.js) into your HTML page, just after jQuery.
 
 
 
