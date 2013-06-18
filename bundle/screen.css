@@ -16,5 +16,14 @@ h6 {
 }
 
 body {
-	margin-top: 20px;
+	background-image: url(../images/mooning.png);
+}
+
+#container {
+	background-color: #fff;
+	padding: 20px;
+}
+
+.hero-unit {
+	background-image: url(../images/ticks.png);
 }
