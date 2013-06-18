@@ -6,13 +6,13 @@
     //////////////////////////////////
 
     var defaults = {
-        ranges : true,
+        ranges : false,
         max : 0
     };
 
     var Checkboxes = function($context, options) {
         this.$context = $context;
-        var options = $.extend({}, options, defaults);
+        options = $.extend({}, defaults, options);
         var instance = this;
         if (options.ranges) {
             this.$context.on('click.checkboxes', ':checkbox', function(e) {
@@ -28,6 +28,15 @@
                     }
                 }
                 instance.$last = $checkbox.is(':checked') ? $checkbox : null;
+            });
+        }
+        if (options.max > 0) {
+            this.$context.on('click.checkboxes', ':checkbox', function(e) {
+                if (instance.$context.find(':checked').length == options.max) {
+                    instance.$context.find(':checkbox:not(:checked)').prop('disabled', true);
+                } else {
+                    instance.$context.find(':checkbox:not(:checked)').prop('disabled', false);
+                }
             });
         }
     };
