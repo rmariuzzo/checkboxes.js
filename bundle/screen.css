@@ -27,3 +27,13 @@ body {
 .hero-unit {
 	background-image: url(../images/ticks.png);
 }
+
+pre {
+	padding: 0;
+	border: 0;
+}
+
+pre > code {
+	padding: 20px;
+	line-height: 1.6em;
+}
