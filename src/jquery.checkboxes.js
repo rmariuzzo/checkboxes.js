@@ -6,7 +6,7 @@
     //////////////////////////////////
 
     var defaults = {
-        ranges : false,
+        range : false,
         max : 0
     };
 
@@ -14,7 +14,7 @@
         this.$context = $context;
         options = $.extend({}, defaults, options);
         var instance = this;
-        if (options.ranges) {
+        if (options.range) {
             this.$context.on('click.checkboxes', ':checkbox', function(e) {
                 var $checkbox = $(e.target);
                 if (e.shiftKey && instance.$last) {
