@@ -66,8 +66,8 @@
 							<a href="#range-selection-of-checkboxes">Enabling range selection of checkboxes</a>
 						</li>
 						<li>
-							<i class="icon-code"></i>
-							<a href="#data-api">Data API documentation</a>
+							<i class="icon-sort-by-order"></i>
+							<a href="#limit-max-number-of-checked-checkboxes">Limiting the number of checked checkboxes in a context</a>
 						</li>
 					</ul>
 				</div>
@@ -77,7 +77,7 @@
 			<h2 id="checking-all-checkboxes">Checking all checkboxes in context</h2>
 			<div class="row">
 				<div class="span6">
-					<p><strong>Code</strong></p>
+					<p><strong>JavaScript</strong></p>
 					<pre><code>
 jQuery(function($) {
     $('#btn-check-all').on('click', function(e) {
@@ -98,6 +98,14 @@ jQuery(function($) {
 						    });
 						});
 					</script>
+					<p><strong>Data API</strong></p>
+					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
+					<pre><code>
+&lt;a href="#table1" 
+   data-toggle="checkboxes"
+   data-action="check"&gt;Check all&lt;/a&gt;
+					</code></pre>
+					<p>This will have the exact same effect as the JavaScript code.</p>
 				</div>
 				<div class="span6">
 					<p><strong>Results</strong></p>
@@ -153,7 +161,7 @@ jQuery(function($) {
 			<h2 id="unchecking-all-checkboxes">Unchecking all checkboxes in context</h2>
 			<div class="row">
 				<div class="span6">
-					<p><strong>Code</strong></p>
+					<p><strong>JavaScript</strong></p>
 					<pre><code>
 jQuery(function($) {
     $('#btn-uncheck-all').on('click', function(e) {
@@ -174,6 +182,14 @@ jQuery(function($) {
 						    });
 						});
 					</script>
+					<p><strong>Data API</strong></p>
+					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
+					<pre><code>
+&lt;a href="#table2" 
+   data-toggle="checkboxes"
+   data-action="uncheck"&gt;Uncheck all&lt;/a&gt;
+					</code></pre>
+					<p>This will have the exact same effect as the JavaScript code.</p>
 				</div>
 				<div class="span6">
 					<p><strong>Results</strong></p>
@@ -229,7 +245,7 @@ jQuery(function($) {
 			<h2 id="toggling-all-checkboxes">Toggling all checkboxes's state in context</h2>
 			<div class="row">
 				<div class="span6">
-					<p><strong>Code</strong></p>
+					<p><strong>JavaScript</strong></p>
 					<pre><code>
 jQuery(function($) {
     $('#btn-toggle').on('click', function(e) {
@@ -246,6 +262,14 @@ jQuery(function($) {
 						    });
 						});
 					</script>
+					<p><strong>Data API</strong></p>
+					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
+					<pre><code>
+&lt;a href="#table3" 
+   data-toggle="checkboxes"
+   data-action="toggle"&gt;Toggle all&lt;/a&gt;
+					</code></pre>
+					<p>This will have the exact same effect as the JavaScript code.</p>
 				</div>
 				<div class="span6">
 					<p><strong>Results</strong></p>
@@ -298,30 +322,101 @@ jQuery(function($) {
 			<!-- Example: Enabling range selection of checkboxes -->
 			<hr>
 			<h2 id="range-selection-of-checkboxes">Enabling range selection of checkboxes</h2>
+			<p><em>Range selection</em> is a feature that allow checking a range of checkboxes by checking the first checkbox as the starting point, then while pressing the <code>SHIFT</code> key checking another checkbox that will be the ending of the range, and all checkboxes between will be checked.</p>
 			<div class="row">
 				<div class="span6">
-					<p><strong>Code</strong></p>
+					<p><strong>JavaScript</strong></p>
 					<pre><code>
 jQuery(function($) {
-    $('#table4').checkboxes({ ranges: true });
+    $('#table4').checkboxes({ range: true });
 });
 					</code></pre>
 					<script>
 						jQuery(function($) {
-						    $('#table4').checkboxes({ ranges: true });
+						    $('#table4').checkboxes({ range: true });
 						});
 					</script>
+					<div class="alert">
+						<strong>Note</strong>
+						<p>After initializing a context of checkboxes for range selection, it could not disabled. In a future release, it will be possible to disable this feature after enabling it.</p>
+						<p>If you need this right now: <a href="http://github.com/rmariuzzo/checkboxes.js/issues/new">tell me</a>.</p>
+					</div>
 				</div>
 				<div class="span6">
 					<p><strong>Results</strong></p>
 					<div class="well">
-						<p>
-							<a href="#" class="btn btn-primary" id="btn-toggle">Toggle all</a>
-						</p>
 						<table class="table table-bordered table-condensed table-striped" id="table4">
 							<thead>
 								<tr>
 									<th>#table4</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><input type="checkbox"> Row 1</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"> Row 2 <small>(check me)</small></td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"> Row 3</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"> Row 4</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"> Row 5</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"> Row 6</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"> Row 7 <small>(now pressing SHIFT and check me)</small></td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"> Row 8</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"> Row 9</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox"> Row 10</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- Example: Limiting the number of checked checkboxes in a context -->
+			<hr>
+			<h2 id="limit-max-number-of-checked-checkboxes">Limiting the number of checked checkboxes in a context</h2>
+			<p>Often, it is useful to limit the number of checkboxes that can be checked within a context.</p>
+			<div class="row">
+				<div class="span6">
+					<p><strong>JavaScript</strong></p>
+					<pre><code>
+jQuery(function($) {
+    $('#table5').checkboxes({ max : 3 });
+});
+					</code></pre>
+					<script>
+						jQuery(function($) {
+						    $('#table5').checkboxes({ max : 3 });
+						});
+					</script>
+					<div class="alert">
+						<strong>Note</strong>
+						<p>After initializing a context of checkboxes for a maximum of checked checkboxes, it could not be changed. In a future release, it will be possible to change this feature after enabling it.</p>
+						<p>If you need this right now: <a href="http://github.com/rmariuzzo/checkboxes.js/issues/new">tell me</a>.</p>
+					</div>
+				</div>
+				<div class="span6">
+					<p><strong>Results</strong></p>
+					<div class="well">
+						<table class="table table-bordered table-condensed table-striped" id="table5">
+							<thead>
+								<tr>
+									<th>#table5</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -335,7 +430,7 @@ jQuery(function($) {
 									<td><input type="checkbox"> Row 3</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox"> Row 4</td>
+									<td><input type="checkbox"> Row 4 <small>(if you check the first three, you won't be able to check me)</small></td>
 								</tr>
 								<tr>
 									<td><input type="checkbox"> Row 5</td>
@@ -362,6 +457,19 @@ jQuery(function($) {
 			</div>
 		</div>
 	</div>
+	<!-- Footer -->
+	<footer class="container">
+		<div class="row">
+			<div class="span6">
+				<h1>checkb<i class="icon-check"></i>xes<small>.js</small></h1>
+				<p>was created by <a href="http://github.com/rmariuzzo">rmariuzzo</a> with all the love in the world</p>
+			</div>
+			<div class="span6">
+				<br>
+				<p>checkb<i class="icon-check"></i>xes<small>.js</small> would not have been possible without the help of: <a href="http://jquery.com/">jQuery</a>, <a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a>, <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a>, <a href="http://glyphicons.com/">Glyphicons</a>, <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a> and <a href="http://subtlepatterns.com/">Subtle Patterns</a>. <em>I'm very thankful of all for them.</em></p>
+			</div>
+		</div>
+	</footer>
 	<script>
 		jQuery(function($) {
 			$('pre > code').each(function() {
