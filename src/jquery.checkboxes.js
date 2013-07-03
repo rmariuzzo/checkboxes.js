@@ -5,40 +5,8 @@
     /* Checkboxes class definition. */
     //////////////////////////////////
 
-    var defaults = {
-        range : false,
-        max : 0
-    };
-
     var Checkboxes = function($context, options) {
         this.$context = $context;
-        options = $.extend({}, defaults, options);
-        var instance = this;
-        if (options.range) {
-            this.$context.on('click.checkboxes', ':checkbox', function(e) {
-                var $checkbox = $(e.target);
-                if (e.shiftKey && instance.$last) {
-                    var $checkboxes = instance.$context.find(':checkbox'),
-                        from = $checkboxes.index(instance.$last),
-                        to = $checkboxes.index($checkbox);
-                    if (to > from) {
-                        $checkboxes.slice(from, to).prop('checked', true);
-                    } else {
-                        $checkboxes.slice(to, from).prop('checked', true);
-                    }
-                }
-                instance.$last = $checkbox.is(':checked') ? $checkbox : null;
-            });
-        }
-        if (options.max > 0) {
-            this.$context.on('click.checkboxes', ':checkbox', function(e) {
-                if (instance.$context.find(':checked').length == options.max) {
-                    instance.$context.find(':checkbox:not(:checked)').prop('disabled', true);
-                } else {
-                    instance.$context.find(':checkbox:not(:checked)').prop('disabled', false);
-                }
-            });
-        }
     };
 
     // Check all checkboxes in context.
@@ -59,21 +27,61 @@
         });
     };
 
+    // Set the maximum number of checkboxes that can be checked.
+    Checkboxes.prototype.max = function(max) {
+        if (max == 0) {
+            // Disable max.
+            this.$context.off('click.checkboxes');
+        } else if (max > 0) {
+            // Enable max.
+            var instance = this;
+            this.$context.on('click.checkboxes.max', ':checkbox', function(e) {
+                if (instance.$context.find(':checked').length == max) {
+                    instance.$context.find(':checkbox:not(:checked)').prop('disabled', true);
+                } else {
+                    instance.$context.find(':checkbox:not(:checked)').prop('disabled', false);
+                }
+            });
+        }
+    };
+
+    // Enable or disable range selection.
+    Checkboxes.prototype.range = function(enable) {
+        if (enable) {
+            var instance = this;
+            this.$context.on('click.checkboxes.range', ':checkbox', function(e) {
+                var $checkbox = $(e.target);
+                if (e.shiftKey && instance.$last && ($checkbox.prop('checked') == instance.$last.prop('checked'))) {
+                    var $checkboxes = instance.$context.find(':checkbox'),
+                        from = $checkboxes.index(instance.$last),
+                        to = $checkboxes.index($checkbox),
+                        start = Math.min(from, to),
+                        end = Math.max(from, to);
+                    $checkboxes.slice(start, end).prop('checked', true);
+                }
+                instance.$last = $checkbox.is(':checked') ? $checkbox : null;
+            });
+        } else {
+            this.$context.off('click.checkboxes.range');
+        }
+    };
+
     ///////////////////////////////////
     /* Checkboxes plugin definition. */
     ///////////////////////////////////
 
     var old = $.fn.checkboxes;
 
-    $.fn.checkboxes = function(options) {
+    $.fn.checkboxes = function(method) {
+        var methodArgs = Array.prototype.slice.call(arguments, 1);
         return this.each(function() {
             var $this = $(this),
                 data = $this.data('checkboxes');
             if (!data) {
-                $this.data('checkboxes', (data = new Checkboxes($this, typeof options == 'object' && options)));
+                $this.data('checkboxes', (data = new Checkboxes($this, typeof method == 'object' && method)));
             }
-            if (typeof options === 'string') {
-                data[options]();
+            if (typeof method === 'string') {
+                data[method].apply(data, methodArgs);
             }
         });
     };
