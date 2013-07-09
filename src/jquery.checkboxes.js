@@ -94,7 +94,7 @@
             if (!data) {
                 $this.data('checkboxes', (data = new Checkboxes($this, typeof method == 'object' && method)));
             }
-            if (typeof method === 'string') {
+            if (typeof method === 'string' && data[method]) {
                 data[method].apply(data, methodArgs);
             }
         });
