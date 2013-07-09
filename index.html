@@ -21,7 +21,7 @@
 			<div class="row">
 				<div class="span12">
 					<div class="hero-unit">
-						<h1>checkb<i class="icon-check"></i>xes<small>.js</small></h1>
+						<h1>checkb<i class="icon-check" id="logo-icon"></i>xes<small>.js</small></h1>
 						<p><small>TL;DR</small> &mdash; A jQuery plugin that give you nice powers over your checkboxes.</p>
 						<p>
 							<a class="btn btn-inverse btn-large" href="http://github.com/rmariuzzo/checkboxes.js"><i class="icon-github"></i> View in GitHub</a>
@@ -87,18 +87,6 @@ jQuery(function($) {
     });
 });
 					</code></pre>
-					<script>
-						jQuery(function($) {
-						    $('#btn-check-all').on('click', function(e) {
-						        $('#table1').checkboxes('check');
-						        e.preventDefault();
-						    });
-						    $('#btn-check-all-reset').on('click', function(e) {
-						    	$('#table1').checkboxes('uncheck');
-						    	e.preventDefault();
-						    });
-						});
-					</script>
 					<p><strong>Data API</strong></p>
 					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
 					<pre><code>
@@ -112,8 +100,8 @@ jQuery(function($) {
 					<p><strong>Results</strong></p>
 					<div class="well">
 						<p>
-							<a href="#" class="btn btn-primary" id="btn-check-all">Check all</a>
-							<a href="#" class="btn btn-link" id="btn-check-all-reset">Reset</a>
+							<a href="#table1" class="btn btn-primary" data-toggle="checkboxes" data-action="check">Check all</a>
+							<a href="#table1" class="btn btn-link" data-toggle="checkboxes" data-action="uncheck">Reset</a>
 						</p>
 						<table class="table table-bordered table-condensed table-striped" id="table1">
 							<thead>
@@ -171,18 +159,6 @@ jQuery(function($) {
     });
 });
 					</code></pre>
-					<script>
-						jQuery(function($) {
-						    $('#btn-uncheck-all').on('click', function(e) {
-						        $('#table2').checkboxes('uncheck');
-						        e.preventDefault();
-						    });
-						    $('#btn-uncheck-all-reset').on('click', function(e) {
-						    	$('#table2').checkboxes('check');
-						    	e.preventDefault();
-						    });
-						});
-					</script>
 					<p><strong>Data API</strong></p>
 					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
 					<pre><code>
@@ -196,8 +172,8 @@ jQuery(function($) {
 					<p><strong>Results</strong></p>
 					<div class="well">
 						<p>
-							<a href="#" class="btn btn-primary" id="btn-uncheck-all">Uncheck all</a>
-							<a href="#" class="btn btn-link" id="btn-uncheck-all-reset">Reset</a>
+							<a href="#table2" class="btn btn-primary" data-toggle="checkboxes" data-action="uncheck">Uncheck all</a>
+							<a href="#table2" class="btn btn-link" data-toggle="checkboxes" data-action="check">Reset</a>
 						</p>
 						<table class="table table-bordered table-condensed table-striped" id="table2">
 							<thead>
@@ -255,14 +231,6 @@ jQuery(function($) {
     });
 });
 					</code></pre>
-					<script>
-						jQuery(function($) {
-						    $('#btn-toggle').on('click', function(e) {
-						        $('#table3').checkboxes('toggle');
-						        e.preventDefault();
-						    });
-						});
-					</script>
 					<p><strong>Data API</strong></p>
 					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
 					<pre><code>
@@ -276,7 +244,7 @@ jQuery(function($) {
 					<p><strong>Results</strong></p>
 					<div class="well">
 						<p>
-							<a href="#" class="btn btn-primary" id="btn-toggle">Toggle all</a>
+							<a href="#table3" class="btn btn-primary" data-toggle="checkboxes" data-action="toggle">Toggle all</a>
 						</p>
 						<table class="table table-bordered table-condensed table-striped" id="table3">
 							<thead>
@@ -329,24 +297,27 @@ jQuery(function($) {
 					<p><strong>JavaScript</strong></p>
 					<pre><code>
 jQuery(function($) {
-    $('#table4').checkboxes({ range: true });
+    $('#table4').checkboxes('range', true);
 });
 					</code></pre>
-					<script>
-						jQuery(function($) {
-						    $('#table4').checkboxes({ range: true });
-						});
-					</script>
-					<div class="alert">
-						<strong>Note</strong>
-						<p>After initializing a context of checkboxes for range selection, it could not disabled. In a future release, it will be possible to disable this feature after enabling it.</p>
-						<p>If you need this right now: <a href="http://github.com/rmariuzzo/checkboxes.js/issues/new">tell me</a>.</p>
-					</div>
+					<p><strong>Data API</strong></p>
+					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
+					<pre><code>
+&lt;div data-toggle="checkboxes"
+     data-range="true"&gt;
+	 ...
+	 &lt;-- set of checkboxes --&gt;
+	 ...
+&lt;/div&gt;
+					</code></pre>
+					<p>This will have the exact same effect as the JavaScript code.</p>
 				</div>
 				<div class="span6">
 					<p><strong>Results</strong></p>
 					<div class="well">
-						<table class="table table-bordered table-condensed table-striped" id="table4">
+						<table class="table table-bordered table-condensed table-striped" id="table4"
+							data-toggle="checkboxes"
+							data-range="true">
 							<thead>
 								<tr>
 									<th>#table4</th>
@@ -397,24 +368,27 @@ jQuery(function($) {
 					<p><strong>JavaScript</strong></p>
 					<pre><code>
 jQuery(function($) {
-    $('#table5').checkboxes({ max : 3 });
+    $('#table5').checkboxes('max', 3);
 });
 					</code></pre>
-					<script>
-						jQuery(function($) {
-						    $('#table5').checkboxes({ max : 3 });
-						});
-					</script>
-					<div class="alert">
-						<strong>Note</strong>
-						<p>After initializing a context of checkboxes for a maximum of checked checkboxes, it could not be changed. In a future release, it will be possible to change this feature after enabling it.</p>
-						<p>If you need this right now: <a href="http://github.com/rmariuzzo/checkboxes.js/issues/new">tell me</a>.</p>
-					</div>
+					<p><strong>Data API</strong></p>
+					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
+					<pre><code>
+&lt;div data-toggle="checkboxes"
+     data-max="3"&gt;
+	 ...
+	 &lt;-- set of checkboxes --&gt;
+	 ...
+&lt;/div&gt;
+					</code></pre>
+					<p>This will have the exact same effect as the JavaScript code.</p>
 				</div>
 				<div class="span6">
 					<p><strong>Results</strong></p>
 					<div class="well">
-						<table class="table table-bordered table-condensed table-striped" id="table5">
+						<table class="table table-bordered table-condensed table-striped" id="table5"
+							data-toggle="checkboxes"
+							data-max="3">
 							<thead>
 								<tr>
 									<th>#table5</th>
