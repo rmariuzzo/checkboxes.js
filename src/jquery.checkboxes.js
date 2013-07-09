@@ -9,17 +9,23 @@
         this.$context = $context;
     };
 
-    // Check all checkboxes in context.
+    /**
+	 * Check all checkboxes in context.
+	 */
     Checkboxes.prototype.check = function() {
         this.$context.find(':checkbox').prop('checked', true);
     };
 
-    // Uncheck all checkboxes in context.
+    /**
+	 * Uncheck all checkboxes in context.
+	 */
     Checkboxes.prototype.uncheck = function() {
         this.$context.find(':checkbox').prop('checked', false);
     };
 
-    // Toggle the state of all checkboxes in context.
+    /**
+	 * Toggle the state of all checkboxes in context.
+	 */
     Checkboxes.prototype.toggle = function() {
         this.$context.find(':checkbox').each(function() {
             var $checkbox = $(this);
@@ -27,7 +33,11 @@
         });
     };
 
-    // Set the maximum number of checkboxes that can be checked.
+    /**
+	 * Set the maximum number of checkboxes that can be checked.
+	 *
+	 * @param max {number} The maximum number of checkbox allowed to be checked.
+	 */
     Checkboxes.prototype.max = function(max) {
         if (max == 0) {
             // Disable max.
@@ -45,21 +55,25 @@
         }
     };
 
-    // Enable or disable range selection.
+    /**
+	 * Enable or disable range selection.
+	 * 
+	 * @param enable {boolean} Indicate is range selection has to be enabled.
+	 */
     Checkboxes.prototype.range = function(enable) {
         if (enable) {
             var instance = this;
             this.$context.on('click.checkboxes.range', ':checkbox', function(e) {
                 var $checkbox = $(e.target);
-                if (e.shiftKey && instance.$last && ($checkbox.prop('checked') == instance.$last.prop('checked'))) {
+                if (e.shiftKey && instance.$last) {
                     var $checkboxes = instance.$context.find(':checkbox'),
                         from = $checkboxes.index(instance.$last),
                         to = $checkboxes.index($checkbox),
                         start = Math.min(from, to),
-                        end = Math.max(from, to);
-                    $checkboxes.slice(start, end).prop('checked', true);
+                        end = Math.max(from, to) + 1;
+                    $checkboxes.slice(start, end).prop('checked', $checkbox.prop('checked'));
                 }
-                instance.$last = $checkbox.is(':checked') ? $checkbox : null;
+                instance.$last = $checkbox;
             });
         } else {
             this.$context.off('click.checkboxes.range');
@@ -108,8 +122,21 @@
             href = el.attr('href'),
             $context = $(el.data('context') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))),
             action = el.data('action');
-        e.preventDefault();
-        $context.checkboxes(action);
+		if ($context && action) {
+			e.preventDefault();
+			$context.checkboxes(action);
+		}
     });
+	
+	$(document).on('ready.checkboxes.data-api', function() {
+		$('[data-toggle^=checkboxes]').each(function() {
+			var el = $(this),
+				actions = el.data();
+			delete actions.toggle;
+			for (var action in actions) {
+				el.checkboxes(action, actions[action]);
+			}
+		});
+	});
 
 }(window.jQuery);
