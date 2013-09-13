@@ -13,14 +13,18 @@
 	 * Check all checkboxes in context.
 	 */
     Checkboxes.prototype.check = function () {
-        this.$context.find(':checkbox').prop('checked', true);
+        this.$context.find(':checkbox')
+            .filter(':not(:disabled)')
+            .prop('checked', true);
     };
 
     /**
 	 * Uncheck all checkboxes in context.
 	 */
     Checkboxes.prototype.uncheck = function () {
-        this.$context.find(':checkbox').prop('checked', false);
+        this.$context.find(':checkbox')
+            .filter(':not(:disabled)')
+            .prop('checked', false);
     };
 
     /**
