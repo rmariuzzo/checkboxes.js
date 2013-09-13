@@ -31,7 +31,7 @@
 	 * Toggle the state of all checkboxes in context.
 	 */
     Checkboxes.prototype.toggle = function () {
-        this.$context.find(':checkbox').each(function () {
+        this.$context.find(':checkbox').filter(':not(:disabled)').each(function () {
             var $checkbox = $(this);
             $checkbox.prop('checked', !$checkbox.is(':checked'));
         });

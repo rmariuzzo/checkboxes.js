@@ -7,7 +7,8 @@
 	<script src="../src/jquery.checkboxes.js"></script>
 </head>
 <body>
-	<div data-toggle="checkboxes" 
+	<div id="checkboxes"
+		 data-toggle="checkboxes" 
 		 data-max="3" 
 		 data-range="true">
 		<input type="checkbox" id="1">
@@ -19,7 +20,7 @@
 		<input type="checkbox" id="3">
 		<label for="3">Row #3</label>
 		<br>
-		<input type="checkbox" id="4">
+		<input type="checkbox" id="4" disabled="disabled">
 		<label for="4">Row #4</label>
 		<br>
 		<input type="checkbox" id="5">
@@ -40,5 +41,11 @@
 		<input type="checkbox" id="10">
 		<label for="10">Row #10</label>
 	</div>
+	<a href="#checkboxes" 
+	    data-toggle="checkboxes"
+	    data-action="check">Check all</a>
+    <a href="#checkboxes" 
+	    data-toggle="checkboxes"
+	    data-action="uncheck">Uncheck all</a>
 </body>
 </html>
