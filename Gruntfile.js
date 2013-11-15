@@ -15,7 +15,7 @@ module.exports = function(grunt) {
             install: {}
         }
     });
-    
+
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-bower-task');
 
