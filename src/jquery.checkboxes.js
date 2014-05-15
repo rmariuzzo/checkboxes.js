@@ -1,4 +1,6 @@
-/*! Checkbox.js - MIT - Rubens Mariuzzo */ ! function($) {
+/*! Checkbox.js - MIT - Rubens Mariuzzo */ 
+
+! function($) {
 
     //////////////////////////////////
     /* Checkboxes class definition. */
@@ -128,7 +130,9 @@
             $context = $(el.data('context') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))),
             action = el.data('action');
         if ($context && action) {
-            e.preventDefault();
+            if (!el.is(':checkbox')) {
+                e.preventDefault();
+            }
             $context.checkboxes(action);
         }
     });
