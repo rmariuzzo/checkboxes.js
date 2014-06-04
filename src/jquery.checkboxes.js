@@ -1,5 +1,3 @@
-/*! Checkbox.js - MIT - Rubens Mariuzzo */
-
 (function($) {
 
     //////////////////////////////////

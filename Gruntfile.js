@@ -10,14 +10,19 @@ module.exports = function(grunt) {
 
         watch: {
             scripts: {
-                files: ['src/**.js'],
+                files: [
+                    'Gruntfile.js',
+                    'src/**.js'
+                ],
                 tasks: ['jshint']
             }
         },
 
         uglify: {
             options: {
-                banner: '/*! <%= pkg.name %> <%= pkg.version %> | <%= pkg.author %> | <%= grunt.template.today("yyyy-mm-dd") %> | <%= pkg.license %> */\n'
+                banner: '/*! checkboxes.js v<%= pkg.version %> | ' +
+                        '(c) 2013, <%= grunt.template.today("yyyy") %> Rubens Mariuzzo | ' +
+                        'http://github.com/rmariuzzo/checkboxes.js/LICENSE */',
             },
             build: {
                 src: 'src/jquery.checkboxes.js',
@@ -26,9 +31,15 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            all: [
-                'src/**.js'
-            ]
+            all: {
+                src: [
+                    'Gruntfile.js',
+                    'src/**.js'
+                ],
+                options: {
+                    jshintrc: true
+                }
+            }
         }
 
     });
