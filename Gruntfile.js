@@ -10,7 +10,7 @@ module.exports = function(grunt) {
             },
             build: {
                 src: 'src/jquery.checkboxes.js',
-                dest: 'build/jquery.checkboxes.min.js'
+                dest: 'dist/jquery.checkboxes-<%= pkg.version %>.min.js'
             }
         }
     });
