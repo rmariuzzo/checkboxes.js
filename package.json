@@ -1,16 +1,17 @@
 {
-    "name": "checkboxes.js",
-    "version": "1.0.4",
-    "homepage": "https://github.com/rmariuzzo/checkboxes.js",
-    "keywords": "checkbox checkboxes",
-    "license": "MIT",
-    "author": "Rubens Mariuzzo <rubens@mariuzzo.com> (http://mariuzzo.com/)",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/rmariuzzo/checkboxes.js.git"
-    },
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-uglify": "~0.2.2"
-    }
+  "name": "checkboxes.js",
+  "version": "1.0.4",
+  "homepage": "https://github.com/rmariuzzo/checkboxes.js",
+  "keywords": "checkbox checkboxes",
+  "license": "MIT",
+  "author": "Rubens Mariuzzo <rubens@mariuzzo.com> (http://mariuzzo.com/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rmariuzzo/checkboxes.js.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2",
+    "load-grunt-tasks": "^0.4.0"
+  }
 }

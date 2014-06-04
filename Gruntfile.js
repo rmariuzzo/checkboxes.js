@@ -1,5 +1,9 @@
 module.exports = function(grunt) {
 
+    // Load all Grunt tasks.
+    require('load-grunt-tasks')(grunt);
+
+    // Grunt configuration.
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('package.json'),
@@ -13,9 +17,8 @@ module.exports = function(grunt) {
                 dest: 'dist/jquery.checkboxes-<%= pkg.version %>.min.js'
             }
         }
-    });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+    });
 
     grunt.registerTask('default', ['uglify']);
 
