@@ -1,6 +1,6 @@
-/*! Checkbox.js - MIT - Rubens Mariuzzo */ 
+/*! Checkbox.js - MIT - Rubens Mariuzzo */
 
-! function($) {
+(function($) {
 
     //////////////////////////////////
     /* Checkboxes class definition. */
@@ -148,4 +148,4 @@
         });
     });
 
-}(window.jQuery);
+})(window.jQuery);

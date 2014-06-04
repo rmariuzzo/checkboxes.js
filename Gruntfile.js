@@ -16,6 +16,12 @@ module.exports = function(grunt) {
                 src: 'src/jquery.checkboxes.js',
                 dest: 'dist/jquery.checkboxes-<%= pkg.version %>.min.js'
             }
+        },
+
+        jshint: {
+            all: [
+                'src/**.js'
+            ]
         }
 
     });
