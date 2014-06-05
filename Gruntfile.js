@@ -63,5 +63,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['jshint', 'watch']);
+    grunt.registerTask('build', ['jshint', 'jasmine', 'uglify']);
 
 };
