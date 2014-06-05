@@ -22,9 +22,8 @@ module.exports = function(grunt) {
 
         uglify: {
             all: {
-                build: {
-                    src: 'src/jquery.checkboxes.js',
-                    dest: 'dist/jquery.checkboxes-<%= pkg.version %>.min.js'
+                files: {
+                    'dist/jquery.checkboxes-<%= pkg.version %>.min.js': ['src/jquery.checkboxes.js']
                 },
                 options: {
                     banner: '/*! checkboxes.js v<%= pkg.version %> | ' +
