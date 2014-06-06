@@ -3,6 +3,8 @@ checkboxes.js
 
 **Checkboxes.js** is a jQuery plugin that give you nice powers over your checkboxes.
 
+[![Build Status](https://travis-ci.org/rmariuzzo/checkboxes.js.svg?branch=develop)](https://travis-ci.org/rmariuzzo/checkboxes.js)
+
 For more information check the [documentation site](http://rmariuzzo.github.io/checkboxes.js).
 
 Features
