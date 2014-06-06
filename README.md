@@ -2,6 +2,8 @@
 
 > A jQuery plugin that give you nice powers over your checkboxes. http://rmariuzzo.github.io/checkboxes.js
 
+[![Build Status](https://travis-ci.org/rmariuzzo/checkboxes.js.svg?branch=develop)](https://travis-ci.org/rmariuzzo/checkboxes.js)
+
 ## Installation
 
 #### With bower:
