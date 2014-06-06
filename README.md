@@ -40,10 +40,10 @@
  - [Grunt](http://gruntjs.com/).
  - [Bower](http://bower.io/).
 
-The process is very simple.
+#### Development Workflow
 
  1. **[Fork](https://github.com/rmariuzzo/checkboxes.js/fork)** this respository.
- 2. **Clone** your fork and create a branch feature branch from develop.
+ 2. **Clone** your fork and create a feature branch from develop.
         git clone git@github.com:<your-username>/checkboxes.js.git
         git fetch origin
         git checkout develop
@@ -59,7 +59,7 @@ Questions? [Hit me](https://github.com/rmariuzzo/).
 
 #### ProTip:
 
- - When coding run `grunt`, this will watch for any change in source and test files, then it will lint and test your code as you code.
+> When coding run `grunt`, this will watch for any change in source and test files, then it will lint and test your code as you code.
 
 ## Tests
 
