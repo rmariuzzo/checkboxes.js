@@ -76,7 +76,8 @@
                         end = Math.max(from, to) + 1;
                     $checkboxes.slice(start, end)
                         .filter(':not(:disabled)')
-                        .prop('checked', $checkbox.prop('checked'));
+                        .prop('checked', $checkbox.prop('checked'))
+                        .trigger('change');
                 }
                 instance.$last = $checkbox;
             });
