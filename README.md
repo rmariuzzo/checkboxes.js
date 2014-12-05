@@ -1,10 +1,10 @@
 # checkboxes.js
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/rmariuzzo/checkboxes.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > A jQuery plugin that give you nice powers over your checkboxes. http://rmariuzzo.github.io/checkboxes.js
 
 [![Build Status](https://travis-ci.org/rmariuzzo/checkboxes.js.svg?branch=develop)](https://travis-ci.org/rmariuzzo/checkboxes.js)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/rmariuzzo/checkboxes.js)
 
 ## Installation
 
