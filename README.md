@@ -1,4 +1,5 @@
 # checkboxes.js
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/rmariuzzo/checkboxes.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > A jQuery plugin that give you nice powers over your checkboxes. http://rmariuzzo.github.io/checkboxes.js
 
