@@ -10,6 +10,8 @@ module.exports = function (grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
+    clean: ['dist'],
+
     watch: {
       scripts: {
         files: [
@@ -64,7 +66,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('default', ['jshint', 'watch']);
-  grunt.registerTask('build', ['jshint', 'jasmine', 'uglify']);
+  grunt.registerTask('build', ['clean', 'jshint', 'jasmine', 'uglify']);
   grunt.registerTask('test', ['jasmine']);
   grunt.registerTask('travis', ['jshint', 'jasmine']);
 

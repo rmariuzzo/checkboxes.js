@@ -1,6 +1,6 @@
 {
   "name": "checkboxes.js",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "homepage": "https://github.com/rmariuzzo/checkboxes.js",
   "keywords": "checkbox checkboxes",
   "license": "MIT",
@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jasmine": "~0.6.5",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-uglify": "~0.2.2",
