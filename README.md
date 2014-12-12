@@ -1,6 +1,6 @@
 # checkboxes.js
 
-> A jQuery plugin that give you nice powers over your checkboxes. http://rmariuzzo.github.io/checkboxes.js
+> A jQuery plugin that gives you nice powers over your checkboxes. http://rmariuzzo.github.io/checkboxes.js
 
 [![Build Status](https://travis-ci.org/rmariuzzo/checkboxes.js.svg?branch=develop)](https://travis-ci.org/rmariuzzo/checkboxes.js)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
@@ -19,12 +19,12 @@
 
 ### Features
 
- * **Check all** checkboxes in context
- * **Uncheck all** checkboxes in context
- * **Toggle states** of all checkboxes in context
- * Enable **range selection**
- * **Limit** the number of checked checkbox per context
- * **Data API** like Twitter Bootstrap
+ * **Check all** checkboxes in context.
+ * **Uncheck all** checkboxes in context.
+ * **Toggle states** of all checkboxes in context.
+ * Enable **range selection**.
+ * **Limit** the number of checked checkbox per context.
+ * **Data API** like Twitter Bootstrap.
 
 ### Documentation and examples
 
