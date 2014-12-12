@@ -8,12 +8,8 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
-# Tab indentation (no size specified)
+# Tab indentation.
 [*.js]
-indent_style = tab
-
-# Indentation override for all JS under lib directory
-[lib/**.js]
 indent_style = space
 indent_size = 2
 
