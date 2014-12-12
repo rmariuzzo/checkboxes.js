@@ -1,10 +1,24 @@
 {
   "name": "checkboxes.js",
   "version": "1.0.6",
+  "description": "A jQuery plugin that gives you nice powers over your checkboxes.",
+  "keywords": [
+    "checkbox",
+    "checkboxes",
+    "range",
+    "jquery",
+    "plugin"
+  ],
   "homepage": "https://github.com/rmariuzzo/checkboxes.js",
-  "keywords": "checkbox checkboxes",
+  "bugs": "https://github.com/rmariuzzo/checkboxes.js/issues",
   "license": "MIT",
-  "author": "Rubens Mariuzzo <rubens@mariuzzo.com> (http://mariuzzo.com/)",
+  "author": {
+    "name": "Rubens Mariuzzo",
+    "email": "rubens@mariuzzo.com",
+    "url": "https://github.com/rmariuzzo"
+  },
+  "contributors": [],
+  "main": "dist/jquery.checkboxes-1.0.6.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rmariuzzo/checkboxes.js.git"
