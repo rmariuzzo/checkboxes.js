@@ -21,6 +21,7 @@
   Checkboxes.prototype.check = function () {
     this.$context.find(':checkbox')
       .filter(':not(:disabled)')
+      .filter(':visible')
       .prop('checked', true);
   };
 
@@ -30,6 +31,7 @@
   Checkboxes.prototype.uncheck = function () {
     this.$context.find(':checkbox')
       .filter(':not(:disabled)')
+      .filter(':visible')
       .prop('checked', false);
   };
 
@@ -39,6 +41,7 @@
   Checkboxes.prototype.toggle = function () {
     this.$context.find(':checkbox')
       .filter(':not(:disabled)')
+      .filter(':visible')
       .each(function () {
         var $checkbox = $(this);
         $checkbox.prop('checked', !$checkbox.is(':checked'));
