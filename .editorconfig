@@ -11,9 +11,9 @@ insert_final_newline = true
 # Tab indentation.
 [*.js]
 indent_style = space
-indent_size = 2
+indent_size = 4
 
 # Matches the exact files either package.json or bower.json
 [{package.json,bower.json,.travis.yml}]
 indent_style = space
-indent_size = 2
+indent_size = 4
