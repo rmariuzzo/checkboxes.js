@@ -14,6 +14,17 @@
   var Checkboxes = function (context) {
     this.$context = context;
   };
+  
+  /** 
+   * Random check all checkboxes in context. New!!! By cottayson
+   */
+  Checkboxes.prototype.randomcheck = function () {
+    this.$context.find(':checkbox')
+      .filter(':not(:disabled)')
+      .each(function () {
+        $(this).prop( 'checked', parseInt(2*Math.random()) );
+      });
+  };
 
   /**
    * Check all checkboxes in context.
