@@ -10,7 +10,7 @@
 
 #### With bower:
 
-    bower install checkboxes --save-dev
+    bower install checkboxes --save
 
 #### Without bower:
 
