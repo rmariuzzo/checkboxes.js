@@ -1,18 +1,29 @@
+// Setup Jasmine's fixtures path.
+
 jasmine.getFixtures().fixturesPath = 'tests/fixtures';
+
+// Spec description.
 
 describe('The `range` method', function () {
     'use strict';
 
+    // Load fixtures and setup the testing contexts before each specs.
+
+    var ctx;
+
+    beforeEach(function () {
+        loadFixtures('mixed.html');
+        ctx = setupContext();
+    });
+
+    // Spec definitions.
+
     it('should exists', function () {
-        loadFixtures('checked.html');
-        var el = $('body').checkboxes();
-        expect(el.data('checkboxes').range).toBeDefined();
+        expect(ctx.original.checkboxes().data('checkboxes').range).toBeDefined();
     });
 
     it('should be a function', function () {
-        loadFixtures('checked.html');
-        var el = $('body').checkboxes();
-        expect(typeof el.data('checkboxes').range).toBe('function');
+        expect(typeof ctx.original.checkboxes().data('checkboxes').range).toBe('function');
     });
 
 });

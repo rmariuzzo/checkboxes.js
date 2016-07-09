@@ -1,45 +1,43 @@
+// Setup Jasmine's fixtures path.
+
 jasmine.getFixtures().fixturesPath = 'tests/fixtures';
 
+// Spec description.
+//
 describe('The `uncheck` method', function () {
     'use strict';
 
+    // Load fixtures and setup the testing contexts before each specs.
+
+    var ctx;
+
+    beforeEach(function () {
+        loadFixtures('mixed.html');
+        ctx = setupContext();
+    });
+
+    // Spec definitions.
+
     it('should exists', function () {
-        loadFixtures('checked.html');
-        var el = $('body').checkboxes();
-        expect(el.data('checkboxes').uncheck).toBeDefined();
+        expect(ctx.original.checkboxes().data('checkboxes').uncheck).toBeDefined();
     });
 
     it('should be a function', function () {
-        loadFixtures('checked.html');
-        var el = $('body').checkboxes();
-        expect(typeof el.data('checkboxes').uncheck).toBe('function');
+        expect(typeof ctx.original.checkboxes().data('checkboxes').uncheck).toBe('function');
     });
 
-    it('should uncheck all checkboxes in context', function () {
-        loadFixtures('checked.html');
-        var el = $('body').checkboxes('uncheck');
-        expect(el.find(':checkbox:not(:disabled)')).not.toBeChecked();
-    });
+    it('should uncheck all visible and enabled checkboxes in context', function () {
+        // Uncheck all checkboxes in context.
+        ctx.modified.checkboxes('uncheck');
 
-    it('should uncheck specified checkbox', function () {
-        // Check first checkbox.
-        loadFixtures('checked.html');
-        var el = $(':checkbox:first').parent().checkboxes('uncheck');
-        expect(el.find(':checkbox:first')).not.toBeChecked();
-        expect(el.find(':checkbox:not(:first)')).toBeChecked();
-
-        // Check last checkbox.
-        loadFixtures('checked.html');
-        el = $(':checkbox:last').parent().checkboxes('uncheck');
-        expect(el.find(':checkbox:last')).not.toBeChecked();
-        expect(el.find(':checkbox:not(:last)')).toBeChecked();
-    });
-
-    it('should check all checkboxes in context, but no disabled ones', function () {
-        loadFixtures('checked.html');
-        var el = $('body').checkboxes('uncheck');
-        expect(el.find(':checkbox:disabled')).toBeChecked();
-        expect(el.find(':checkbox:not(:disabled)')).not.toBeChecked();
+        // Ensure all checkboxes were unchecked as expected.
+        ctx.each(function (original, modified, originalState, modifiedState) {
+            if (!original.is(':disabled') && original.is(':visible')) {
+                expect(modified).not.toBeChecked();
+            } else {
+                expect(modifiedState).toBe(originalState);
+            }
+        });
     });
 
 });

@@ -2,72 +2,77 @@
 
 module.exports = function (grunt) {
 
-  // Load all Grunt tasks.
-  require('load-grunt-tasks')(grunt);
+    // Load all Grunt tasks.
+    require('load-grunt-tasks')(grunt);
 
-  // Grunt configuration.
-  grunt.initConfig({
+    // Grunt configuration.
+    grunt.initConfig({
 
-    pkg: grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON('package.json'),
 
-    clean: ['dist'],
+        clean: ['dist'],
 
-    watch: {
-      scripts: {
-        files: [
-          'Gruntfile.js',
-          'src/**/*.js',
-          'tests/specs/**/*.js',
-          '!.grunt'
-        ],
-        tasks: ['jshint', 'jasmine']
-      }
-    },
-
-    uglify: {
-      all: {
-        files: {
-          'dist/jquery.checkboxes-<%= pkg.version %>.min.js': ['src/jquery.checkboxes.js']
+        watch: {
+            scripts: {
+                files: [
+                    'Gruntfile.js',
+                    'src/**/*.js',
+                    'tests/specs/**/*.js',
+                    'tests/helpers.js',
+                    '!.grunt'
+                ],
+                tasks: ['jshint', 'jasmine']
+            }
         },
-        options: {
-          banner: '/*! checkboxes.js v<%= pkg.version %> | ' +
-            '(c) 2013, <%= grunt.template.today("yyyy") %> Rubens Mariuzzo | ' +
-            'http://github.com/rmariuzzo/checkboxes.js/LICENSE */',
+
+        uglify: {
+            all: {
+                files: {
+                    'dist/jquery.checkboxes-<%= pkg.version %>.min.js': ['src/jquery.checkboxes.js']
+                },
+                options: {
+                    banner: '/*! checkboxes.js v<%= pkg.version %> | ' +
+                        '(c) 2013, <%= grunt.template.today("yyyy") %> Rubens Mariuzzo | ' +
+                        'http://github.com/rmariuzzo/checkboxes.js/LICENSE */',
+                }
+            }
+        },
+
+        jshint: {
+            all: {
+                src: [
+                    'Gruntfile.js',
+                    'src/**/*.js',
+                    'tests/spec/**/*.js'
+                ],
+                options: {
+                    jshintrc: '<%= baseDir %>.jshintrc',
+                    reporterOutput: ''
+                }
+            }
+        },
+
+        jasmine: {
+            all: {
+                src: 'src/**/*.js',
+                options: {
+                    specs: 'tests/specs/*_spec.js',
+                    vendor: [
+                        'bower_components/jquery/dist/jquery.min.js',
+                        'bower_components/jasmine-jquery/lib/jasmine-jquery.js'
+                    ],
+                    helpers: [
+                        'tests/helpers.js'
+                    ]
+                }
+            }
         }
-      }
-    },
 
-    jshint: {
-      all: {
-        src: [
-          'Gruntfile.js',
-          'src/**/*.js',
-          'tests/spec/**/*.js'
-        ],
-        options: {
-          jshintrc: true
-        }
-      }
-    },
+    });
 
-    jasmine: {
-      all: {
-        src: 'src/**/*.js',
-        options: {
-          specs: 'tests/specs/*_spec.js',
-          vendor: [
-            'bower_components/jquery/dist/jquery.min.js',
-            'bower_components/jasmine-jquery/lib/jasmine-jquery.js'
-          ]
-        }
-      }
-    }
-
-  });
-
-  grunt.registerTask('default', ['jshint', 'watch']);
-  grunt.registerTask('build', ['clean', 'jshint', 'jasmine', 'uglify']);
-  grunt.registerTask('test', ['jasmine']);
-  grunt.registerTask('travis', ['jshint', 'jasmine']);
+    grunt.registerTask('default', ['jshint', 'watch']);
+    grunt.registerTask('build', ['clean', 'jshint', 'jasmine', 'uglify']);
+    grunt.registerTask('test', ['jasmine']);
+    grunt.registerTask('travis', ['jshint', 'jasmine']);
 
 };

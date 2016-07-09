@@ -3,13 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<script src="../lib/jquery/jquery.js"></script>
+	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="../src/jquery.checkboxes.js"></script>
 </head>
 <body>
 	<div id="checkboxes"
-		 data-toggle="checkboxes" 
-		 data-max="3" 
+		 data-toggle="checkboxes"
+		 data-max="3"
 		 data-range="true">
 		<input type="checkbox" id="1">
 		<label for="1">Row #1</label>
@@ -23,7 +23,7 @@
 		<input type="checkbox" id="4" disabled="disabled">
 		<label for="4">Row #4</label>
 		<br>
-		<input type="checkbox" id="5">
+		<input type="checkbox" id="5" style="display:none">
 		<label for="5">Row #5</label>
 		<br>
 		<input type="checkbox" id="6">
@@ -41,10 +41,10 @@
 		<input type="checkbox" id="10">
 		<label for="10">Row #10</label>
 	</div>
-	<a href="#checkboxes" 
+	<a href="#checkboxes"
 	    data-toggle="checkboxes"
 	    data-action="check">Check all</a>
-    <a href="#checkboxes" 
+    <a href="#checkboxes"
 	    data-toggle="checkboxes"
 	    data-action="uncheck">Uncheck all</a>
 	<label>

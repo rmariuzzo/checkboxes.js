@@ -21,6 +21,7 @@
     Checkboxes.prototype.check = function () {
         this.$context.find(':checkbox')
             .filter(':not(:disabled)')
+            .filter(':visible')
             .prop('checked', true);
     };
 
@@ -28,7 +29,7 @@
      * Uncheck all checkboxes in context.
      */
     Checkboxes.prototype.uncheck = function () {
-        this.$context.find(':checkbox')
+        this.$context.find(':checkbox:visible')
             .filter(':not(:disabled)')
             .prop('checked', false);
     };
@@ -37,7 +38,7 @@
      * Toggle the state of all checkboxes in context.
      */
     Checkboxes.prototype.toggle = function () {
-        this.$context.find(':checkbox')
+        this.$context.find(':checkbox:visible')
             .filter(':not(:disabled)')
             .each(function () {
                 var $checkbox = $(this);
@@ -63,7 +64,7 @@
             });
         } else {
             // Disable max.
-            this.$context.off('click.checkboxes');
+            this.$context.off('click.checkboxes.max');
         }
     };
 
@@ -80,7 +81,7 @@
                 var $checkbox = $(event.target);
 
                 if (event.shiftKey && instance.$last) {
-                    var $checkboxes = instance.$context.find(':checkbox');
+                    var $checkboxes = instance.$context.find(':checkbox:visible');
                     var from = $checkboxes.index(instance.$last);
                     var to = $checkboxes.index($checkbox);
                     var start = Math.min(from, to);

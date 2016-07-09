@@ -22,6 +22,7 @@
         "spyOn": true,
         "jasmine": true,
         "$": true,
-        "loadFixtures": true
+        "loadFixtures": true,
+        "setupContext": true,
     }
 }
