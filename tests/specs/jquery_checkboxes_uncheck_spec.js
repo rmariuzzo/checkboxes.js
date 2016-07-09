@@ -1,30 +1,27 @@
-/* globals $, jasmine, loadFixtures */
-
-'use strict';
-
 jasmine.getFixtures().fixturesPath = 'tests/fixtures';
 
-describe('The `uncheck` method', function() {
+describe('The `uncheck` method', function () {
+    'use strict';
 
-    it('should exists', function() {
+    it('should exists', function () {
         loadFixtures('checked.html');
         var el = $('body').checkboxes();
         expect(el.data('checkboxes').uncheck).toBeDefined();
     });
 
-    it('should be a function', function() {
+    it('should be a function', function () {
         loadFixtures('checked.html');
         var el = $('body').checkboxes();
         expect(typeof el.data('checkboxes').uncheck).toBe('function');
     });
 
-    it('should uncheck all checkboxes in context', function() {
+    it('should uncheck all checkboxes in context', function () {
         loadFixtures('checked.html');
         var el = $('body').checkboxes('uncheck');
         expect(el.find(':checkbox:not(:disabled)')).not.toBeChecked();
     });
 
-    it('should uncheck specified checkbox', function() {
+    it('should uncheck specified checkbox', function () {
         // Check first checkbox.
         loadFixtures('checked.html');
         var el = $(':checkbox:first').parent().checkboxes('uncheck');
@@ -33,12 +30,12 @@ describe('The `uncheck` method', function() {
 
         // Check last checkbox.
         loadFixtures('checked.html');
-        var el = $(':checkbox:last').parent().checkboxes('uncheck');
+        el = $(':checkbox:last').parent().checkboxes('uncheck');
         expect(el.find(':checkbox:last')).not.toBeChecked();
         expect(el.find(':checkbox:not(:last)')).toBeChecked();
     });
 
-    it('should check all checkboxes in context, but no disabled ones', function() {
+    it('should check all checkboxes in context, but no disabled ones', function () {
         loadFixtures('checked.html');
         var el = $('body').checkboxes('uncheck');
         expect(el.find(':checkbox:disabled')).toBeChecked();

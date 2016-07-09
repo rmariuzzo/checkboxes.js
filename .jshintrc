@@ -12,13 +12,13 @@
   "node"    : true,
   "browser" : true,
   "globals" : {
-    "it"         : false,
-    "xit"        : false,
-    "describe"   : false,
-    "xdescribe"  : false,
-    "beforeEach" : false,
-    "afterEach"  : false,
-    "expect"     : false,
-    "spyOn"      : false
+    "it"         : true,
+    "xit"        : true,
+    "describe"   : true,
+    "xdescribe"  : true,
+    "beforeEach" : true,
+    "afterEach"  : true,
+    "expect"     : true,
+    "spyOn"      : true
   }
 }
