@@ -11,6 +11,11 @@
 #### With bower:
 
     bower install checkboxes --save
+    
+    
+#### With NPM:
+
+    npm install checkboxes.js --save
 
 #### Without bower:
 
