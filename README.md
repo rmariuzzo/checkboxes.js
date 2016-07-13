@@ -10,12 +10,16 @@
 
 #### With bower:
 
-    bower install checkboxes --save
+```shell
+bower install checkboxes --save
+```
     
     
 #### With NPM:
 
-    npm install checkboxes.js --save
+```shell
+npm install checkboxes.js --save
+```
 
 #### Without bower:
 
@@ -74,7 +78,9 @@ Questions? [Hit me](https://github.com/rmariuzzo/).
 
 To run all tests:
 
-    grunt test
+```shell
+grunt test
+```
 
 ### Credits
 
