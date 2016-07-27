@@ -1,101 +1,134 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 (function ($) {
 
-    ////////////////////////
-    /* Checkboxes object. */
-    ////////////////////////
-
     /**
-     * Create a new checkbox context.
-     *
-     * @param {Object} context DOM context.
+     * The Checkboxes class object.
      */
-    var Checkboxes = function Checkboxes(context) {
-        this.$context = context;
-    };
+    var Checkboxes = function () {
 
-    /**
-     * Check all checkboxes in context.
-     */
-    Checkboxes.prototype.check = function () {
-        this.$context.find(':checkbox').filter(':not(:disabled)').filter(':visible').prop('checked', true);
-    };
+        /**
+         * Create a new checkbox context.
+         *
+         * @param {Object} context DOM context.
+         */
+        function Checkboxes(context) {
+            _classCallCheck(this, Checkboxes);
 
-    /**
-     * Uncheck all checkboxes in context.
-     */
-    Checkboxes.prototype.uncheck = function () {
-        this.$context.find(':checkbox:visible').filter(':not(:disabled)').prop('checked', false);
-    };
+            this.$context = context;
+        }
 
-    /**
-     * Toggle the state of all checkboxes in context.
-     */
-    Checkboxes.prototype.toggle = function () {
-        this.$context.find(':checkbox:visible').filter(':not(:disabled)').each(function () {
-            var $checkbox = $(this);
-            $checkbox.prop('checked', !$checkbox.is(':checked'));
-        });
-    };
+        /**
+         * Check all checkboxes in context.
+         */
 
-    /**
-     * Set the maximum number of checkboxes that can be checked.
-     *
-     * @param {Number} max The maximum number of checkbox allowed to be checked.
-     */
-    Checkboxes.prototype.max = function (max) {
-        if (max > 0) {
-            // Enable max.
-            var instance = this;
-            this.$context.on('click.checkboxes.max', ':checkbox', function () {
-                if (instance.$context.find(':checked').length === max) {
-                    instance.$context.find(':checkbox:not(:checked)').prop('disabled', true);
+
+        _createClass(Checkboxes, [{
+            key: 'check',
+            value: function check() {
+                this.$context.find(':checkbox').filter(':not(:disabled)').filter(':visible').prop('checked', true);
+            }
+
+            /**
+             * Uncheck all checkboxes in context.
+             */
+
+        }, {
+            key: 'uncheck',
+            value: function uncheck() {
+                this.$context.find(':checkbox:visible').filter(':not(:disabled)').prop('checked', false);
+            }
+
+            /**
+             * Toggle the state of all checkboxes in context.
+             */
+
+        }, {
+            key: 'toggle',
+            value: function toggle() {
+                this.$context.find(':checkbox:visible').filter(':not(:disabled)').each(function (i, element) {
+                    var $checkbox = $(element);
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                });
+            }
+
+            /**
+             * Set the maximum number of checkboxes that can be checked.
+             *
+             * @param {Number} max The maximum number of checkbox allowed to be checked.
+             */
+
+        }, {
+            key: 'max',
+            value: function max(_max) {
+                var _this = this;
+
+                if (_max > 0) {
+                    (function () {
+                        // Enable max.
+                        var instance = _this;
+                        _this.$context.on('click.checkboxes.max', ':checkbox', function () {
+                            if (instance.$context.find(':checked').length === _max) {
+                                instance.$context.find(':checkbox:not(:checked)').prop('disabled', true);
+                            } else {
+                                instance.$context.find(':checkbox:not(:checked)').prop('disabled', false);
+                            }
+                        });
+                    })();
                 } else {
-                    instance.$context.find(':checkbox:not(:checked)').prop('disabled', false);
+                    // Disable max.
+                    this.$context.off('click.checkboxes.max');
                 }
-            });
-        } else {
-            // Disable max.
-            this.$context.off('click.checkboxes.max');
-        }
-    };
+            }
 
-    /**
-     * Enable or disable range selection.
-     *
-     * @param {Boolean} enable Indicate is range selection has to be enabled.
-     */
-    Checkboxes.prototype.range = function (enable) {
-        if (enable) {
-            var instance = this;
+            /**
+             * Enable or disable range selection.
+             *
+             * @param {Boolean} enable Indicate is range selection has to be enabled.
+             */
 
-            this.$context.on('click.checkboxes.range', ':checkbox', function (event) {
-                var $checkbox = $(event.target);
+        }, {
+            key: 'range',
+            value: function range(enable) {
+                var _this2 = this;
 
-                if (event.shiftKey && instance.$last) {
-                    var $checkboxes = instance.$context.find(':checkbox:visible');
-                    var from = $checkboxes.index(instance.$last);
-                    var to = $checkboxes.index($checkbox);
-                    var start = Math.min(from, to);
-                    var end = Math.max(from, to) + 1;
+                if (enable) {
+                    (function () {
+                        var instance = _this2;
 
-                    $checkboxes.slice(start, end).filter(':not(:disabled)').prop('checked', $checkbox.prop('checked'));
+                        _this2.$context.on('click.checkboxes.range', ':checkbox', function (event) {
+                            var $checkbox = $(event.target);
+
+                            if (event.shiftKey && instance.$last) {
+                                var $checkboxes = instance.$context.find(':checkbox:visible');
+                                var from = $checkboxes.index(instance.$last);
+                                var to = $checkboxes.index($checkbox);
+                                var start = Math.min(from, to);
+                                var end = Math.max(from, to) + 1;
+
+                                $checkboxes.slice(start, end).filter(':not(:disabled)').prop('checked', $checkbox.prop('checked'));
+                            }
+                            instance.$last = $checkbox;
+                        });
+                    })();
+                } else {
+                    this.$context.off('click.checkboxes.range');
                 }
-                instance.$last = $checkbox;
-            });
-        } else {
-            this.$context.off('click.checkboxes.range');
-        }
-    };
+            }
+        }]);
 
-    ///////////////////////////////
+        return Checkboxes;
+    }();
+
     /* Checkboxes jQuery plugin. */
-    ///////////////////////////////
 
     // Keep old Checkboxes jQuery plugin, if any, to no override it.
+
+
     var old = $.fn.checkboxes;
 
     /**
@@ -107,20 +140,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
     $.fn.checkboxes = function (method) {
         // Get extra arguments as method arguments.
-        var methodArgs = Array.prototype.slice.call(arguments, 1);
+        var args = Array.prototype.slice.call(arguments, 1);
 
-        return this.each(function () {
-            var $this = $(this);
+        return this.each(function (i, element) {
+            var $this = $(element);
 
             // Check if we already have an instance.
             var instance = $this.data('checkboxes');
             if (!instance) {
-                $this.data('checkboxes', instance = new Checkboxes($this, (typeof method === 'undefined' ? 'undefined' : _typeof(method)) === 'object' && method));
+                $this.data('checkboxes', instance = new Checkboxes($this));
             }
 
             // Check if we need to invoke a public method.
             if (typeof method === 'string' && instance[method]) {
-                instance[method].apply(instance, methodArgs);
+                instance[method].apply(instance, args);
             }
         });
     };
@@ -128,9 +161,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     // Store a constructor reference.
     $.fn.checkboxes.Constructor = Checkboxes;
 
-    ////////////////////////////////////
     /* Checkboxes jQuery no conflict. */
-    ////////////////////////////////////
 
     /**
      * No conflictive Checkboxes jQuery plugin.
@@ -140,9 +171,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return this;
     };
 
-    //////////////////////////
     /* Checkboxes data-api. */
-    //////////////////////////
 
     /**
      * Handle data-api click.
@@ -168,8 +197,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
     var dataApiDomReadyHandler = function dataApiDomReadyHandler() {
         $('[data-toggle^=checkboxes]').each(function () {
-            var el = $(this),
-                actions = el.data();
+            var el = $(this);
+            var actions = el.data();
             delete actions.toggle;
             for (var action in actions) {
                 el.checkboxes(action, actions[action]);
