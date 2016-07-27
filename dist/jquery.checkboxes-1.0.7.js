@@ -1,6 +1,8 @@
 'use strict';
 
-(($) => {
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+(function ($) {
 
     ////////////////////////
     /* Checkboxes object. */
@@ -11,7 +13,7 @@
      *
      * @param {Object} context DOM context.
      */
-    var Checkboxes = function (context) {
+    var Checkboxes = function Checkboxes(context) {
         this.$context = context;
     };
 
@@ -19,31 +21,24 @@
      * Check all checkboxes in context.
      */
     Checkboxes.prototype.check = function () {
-        this.$context.find(':checkbox')
-            .filter(':not(:disabled)')
-            .filter(':visible')
-            .prop('checked', true);
+        this.$context.find(':checkbox').filter(':not(:disabled)').filter(':visible').prop('checked', true);
     };
 
     /**
      * Uncheck all checkboxes in context.
      */
     Checkboxes.prototype.uncheck = function () {
-        this.$context.find(':checkbox:visible')
-            .filter(':not(:disabled)')
-            .prop('checked', false);
+        this.$context.find(':checkbox:visible').filter(':not(:disabled)').prop('checked', false);
     };
 
     /**
      * Toggle the state of all checkboxes in context.
      */
     Checkboxes.prototype.toggle = function () {
-        this.$context.find(':checkbox:visible')
-            .filter(':not(:disabled)')
-            .each(function () {
-                var $checkbox = $(this);
-                $checkbox.prop('checked', !$checkbox.is(':checked'));
-            });
+        this.$context.find(':checkbox:visible').filter(':not(:disabled)').each(function () {
+            var $checkbox = $(this);
+            $checkbox.prop('checked', !$checkbox.is(':checked'));
+        });
     };
 
     /**
@@ -87,9 +82,7 @@
                     var start = Math.min(from, to);
                     var end = Math.max(from, to) + 1;
 
-                    $checkboxes.slice(start, end)
-                        .filter(':not(:disabled)')
-                        .prop('checked', $checkbox.prop('checked'));
+                    $checkboxes.slice(start, end).filter(':not(:disabled)').prop('checked', $checkbox.prop('checked'));
                 }
                 instance.$last = $checkbox;
             });
@@ -122,7 +115,7 @@
             // Check if we already have an instance.
             var instance = $this.data('checkboxes');
             if (!instance) {
-                $this.data('checkboxes', (instance = new Checkboxes($this, typeof method === 'object' && method)));
+                $this.data('checkboxes', instance = new Checkboxes($this, (typeof method === 'undefined' ? 'undefined' : _typeof(method)) === 'object' && method));
             }
 
             // Check if we need to invoke a public method.
@@ -134,7 +127,6 @@
 
     // Store a constructor reference.
     $.fn.checkboxes.Constructor = Checkboxes;
-
 
     ////////////////////////////////////
     /* Checkboxes jQuery no conflict. */
@@ -148,7 +140,6 @@
         return this;
     };
 
-
     //////////////////////////
     /* Checkboxes data-api. */
     //////////////////////////
@@ -158,10 +149,10 @@
      *
      * @param {Object} event Click event.
      */
-    var dataApiClickHandler = function (event) {
+    var dataApiClickHandler = function dataApiClickHandler(event) {
         var el = $(event.target);
         var href = el.attr('href');
-        var $context = $(el.data('context') || (href && href.replace(/.*(?=#[^\s]+$)/, '')));
+        var $context = $(el.data('context') || href && href.replace(/.*(?=#[^\s]+$)/, ''));
         var action = el.data('action');
 
         if ($context && action) {
@@ -175,7 +166,7 @@
     /**
      * Handle data-api DOM ready.
      */
-    var dataApiDomReadyHandler = function () {
+    var dataApiDomReadyHandler = function dataApiDomReadyHandler() {
         $('[data-toggle^=checkboxes]').each(function () {
             var el = $(this),
                 actions = el.data();
@@ -189,5 +180,4 @@
     // Register data-api listeners.
     $(document).on('click.checkboxes.data-api', '[data-toggle^=checkboxes]', dataApiClickHandler);
     $(document).on('ready.checkboxes.data-api', dataApiDomReadyHandler);
-
 })(window.jQuery);

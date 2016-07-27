@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = (grunt) => {
 
     // Load all Grunt tasks.
     require('load-grunt-tasks')(grunt);
@@ -10,7 +10,10 @@ module.exports = function (grunt) {
 
         pkg: grunt.file.readJSON('package.json'),
 
-        clean: ['dist'],
+        clean: {
+            all: ['dist'],
+            build: ['dist/jquery.checkboxes-<%= pkg.version %>.js']
+        },
 
         watch: {
             scripts: {
@@ -21,19 +24,19 @@ module.exports = function (grunt) {
                     'tests/helpers.js',
                     '!.grunt'
                 ],
-                tasks: ['jshint', 'jasmine']
+                tasks: ['jshint', 'babel', 'jasmine']
             }
         },
 
         uglify: {
             all: {
                 files: {
-                    'dist/jquery.checkboxes-<%= pkg.version %>.min.js': ['src/jquery.checkboxes.js']
+                    'dist/jquery.checkboxes-<%= pkg.version %>.min.js': ['dist/jquery.checkboxes-<%= pkg.version %>.js']
                 },
                 options: {
                     banner: '/*! checkboxes.js v<%= pkg.version %> | ' +
-                        '(c) 2013, <%= grunt.template.today("yyyy") %> Rubens Mariuzzo | ' +
-                        'http://github.com/rmariuzzo/checkboxes.js/LICENSE */',
+                    '(c) 2013 - <%= grunt.template.today("yyyy") %> Rubens Mariuzzo | ' +
+                    'http://github.com/rmariuzzo/checkboxes.js/LICENSE */'
                 }
             }
         },
@@ -54,7 +57,7 @@ module.exports = function (grunt) {
 
         jasmine: {
             all: {
-                src: 'src/**/*.js',
+                src: 'dist/jquery.checkboxes-<%= pkg.version %>.js',
                 options: {
                     specs: 'tests/specs/*_spec.js',
                     vendor: [
@@ -66,13 +69,25 @@ module.exports = function (grunt) {
                     ]
                 }
             }
+        },
+
+        babel: {
+            options: {
+                sourceMap: false,
+                presets: ['es2015']
+            },
+            dist: {
+                files: {
+                    'dist/jquery.checkboxes-<%= pkg.version %>.js': 'src/jquery.checkboxes.js'
+                }
+            }
         }
 
     });
 
     grunt.registerTask('default', ['jshint', 'watch']);
-    grunt.registerTask('build', ['clean', 'jshint', 'jasmine', 'uglify']);
-    grunt.registerTask('test', ['jasmine']);
+    grunt.registerTask('build', ['clean:all', 'jshint', 'babel', 'jasmine', 'uglify', 'clean:build']);
+    grunt.registerTask('test', ['babel', 'jasmine']);
     grunt.registerTask('travis', ['jshint', 'jasmine']);
 
 };

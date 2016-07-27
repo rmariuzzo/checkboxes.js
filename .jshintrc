@@ -11,6 +11,7 @@
   "eqnull"  : true,
   "node"    : true,
   "browser" : true,
+  "esnext": true,
   "globals" : {
     "it"         : true,
     "xit"        : true,
