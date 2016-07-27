@@ -88,6 +88,6 @@ module.exports = (grunt) => {
     grunt.registerTask('default', ['jshint', 'watch']);
     grunt.registerTask('build', ['clean:all', 'jshint', 'babel', 'jasmine', 'uglify', 'clean:build']);
     grunt.registerTask('test', ['babel', 'jasmine']);
-    grunt.registerTask('travis', ['jshint', 'jasmine']);
+    grunt.registerTask('travis', ['jshint', 'babel', 'jasmine']);
 
 };
