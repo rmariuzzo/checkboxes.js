@@ -10,10 +10,7 @@ module.exports = (grunt) => {
 
         pkg: grunt.file.readJSON('package.json'),
 
-        clean: {
-            all: ['dist'],
-            build: ['dist/jquery.checkboxes-<%= pkg.version %>.js']
-        },
+        clean: ['dist'],
 
         watch: {
             scripts: {
@@ -86,7 +83,7 @@ module.exports = (grunt) => {
     });
 
     grunt.registerTask('default', ['jshint', 'watch']);
-    grunt.registerTask('build', ['clean:all', 'jshint', 'babel', 'jasmine', 'uglify', 'clean:build']);
+    grunt.registerTask('build', ['clean', 'jshint', 'babel', 'jasmine', 'uglify']);
     grunt.registerTask('test', ['babel', 'jasmine']);
     grunt.registerTask('travis', ['jshint', 'babel', 'jasmine']);
 
