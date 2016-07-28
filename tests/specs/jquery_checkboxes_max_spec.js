@@ -30,11 +30,11 @@ describe('The `max` method', function () {
         ctx.modified.checkboxes('max', 7);
 
         // Click all checkboxes.
-        ctx.modified.find(':checkbox').each(function (i) {
+        ctx.modified.find(':checkbox').each(function () {
             $(this).click();
         });
 
-        expect(ctx.modified.find(':checkbox:checked').length, 7);
+        expect(ctx.modified.find(':checkbox:checked').length).toBe(7);
     });
 
 });
