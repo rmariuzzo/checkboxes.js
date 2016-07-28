@@ -1,4 +1,4 @@
-# checkboxes.js
+# checkboxes.js – v.1.1.0
 
 > A jQuery plugin that gives you nice powers over your checkboxes. http://rmariuzzo.github.io/checkboxes.js
 
@@ -13,8 +13,7 @@
 ```shell
 bower install checkboxes --save
 ```
-    
-    
+
 #### With NPM:
 
 ```shell
@@ -47,7 +46,7 @@ npm install checkboxes.js --save
 
 > All help are more than welcome!
 
-#### Pre-requesites
+#### Pre-requisites
 
  - [node.js](http://nodejs.org/).
  - [Grunt](http://gruntjs.com/).
@@ -57,16 +56,25 @@ npm install checkboxes.js --save
 
  1. **[Fork](https://github.com/rmariuzzo/checkboxes.js/fork)** this respository.
  2. **Clone** your fork and create a feature branch from develop.
-        git clone git@github.com:<your-username>/checkboxes.js.git
-        git fetch origin
-        git checkout develop
-        git checkout -b feature-<super-power>
+
+    ```shell
+    git clone git@github.com:<your-username>/checkboxes.js.git
+    git fetch origin
+    git checkout develop
+    git checkout -b feature-<super-power>
+    ```
+
  3. **Install** development dependencies.
-        npm install
-        bower install
+ 
+    ```shell
+    npm install
+    bower install
+    ```
+
  4. **Code** and be happy!
- 5. **Test** your code using Jasmine.
- 6. Submit a **pull request** and grab popcorn.
+ 5. **Test** your code (run `grunt` to watch JS files and execute the test specs).
+ 6. When everything is in good shape prepare the distribution files (run `grunt build`).
+ 7. Submit a **pull request** and grab popcorn.
 
 Questions? [Hit me](https://github.com/rmariuzzo/).
 
