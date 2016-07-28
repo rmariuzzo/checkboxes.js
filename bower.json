@@ -1,6 +1,6 @@
 {
     "name": "checkboxes.js",
-    "version": "1.0.7",
+    "version": "1.1.0",
     "homepage": "http://rmariuzzo.github.io/checkboxes.js/",
     "authors": [
         "Rubens Mariuzzo <rubens@mariuzzo.com>"
@@ -25,8 +25,7 @@
         "test",
         "tests"
     ],
-    "devDependencies": {
-        "jquery": "~2.1.1",
-        "jasmine-jquery": "~2.0.3"
+    "dependencies": {
+        "jquery": "^2.0.0"
     }
 }
