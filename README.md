@@ -1,4 +1,4 @@
-# checkboxes.js – v.1.1.0
+# checkboxes.js – v.1.2.0
 
 > A jQuery plugin that gives you nice powers over your checkboxes. http://rmariuzzo.github.io/checkboxes.js
 
@@ -65,7 +65,7 @@ npm install checkboxes.js --save
     ```
 
  3. **Install** development dependencies.
- 
+
     ```shell
     npm install
     bower install
