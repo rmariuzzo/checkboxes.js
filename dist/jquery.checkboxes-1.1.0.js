@@ -30,7 +30,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _createClass(Checkboxes, [{
             key: 'check',
             value: function check() {
-                this.$context.find(':checkbox').filter(':not(:disabled)').filter(':visible').prop('checked', true);
+                this.$context.find(':checkbox').filter(':not(:disabled)').filter(':visible').prop('checked', true).trigger('change');
             }
 
             /**
@@ -40,7 +40,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }, {
             key: 'uncheck',
             value: function uncheck() {
-                this.$context.find(':checkbox:visible').filter(':not(:disabled)').prop('checked', false);
+                this.$context.find(':checkbox:visible').filter(':not(:disabled)').prop('checked', false).trigger('change');
             }
 
             /**
@@ -53,7 +53,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 this.$context.find(':checkbox:visible').filter(':not(:disabled)').each(function (i, element) {
                     var $checkbox = $(element);
                     $checkbox.prop('checked', !$checkbox.is(':checked'));
-                });
+                }).trigger('change');
             }
 
             /**
@@ -110,7 +110,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                                 var start = Math.min(from, to);
                                 var end = Math.max(from, to) + 1;
 
-                                $checkboxes.slice(start, end).filter(':not(:disabled)').prop('checked', $checkbox.prop('checked'));
+                                $checkboxes.slice(start, end).filter(':not(:disabled)').prop('checked', $checkbox.prop('checked')).trigger('change');
                             }
                             instance.$last = $checkbox;
                         });

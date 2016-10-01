@@ -27,6 +27,8 @@ describe('The `uncheck` method', function () {
     });
 
     it('should uncheck all visible and enabled checkboxes in context', function () {
+        var spyEvent = spyOnEvent(ctx.modified, 'change');
+
         // Uncheck all checkboxes in context.
         ctx.modified.checkboxes('uncheck');
 
@@ -38,6 +40,8 @@ describe('The `uncheck` method', function () {
                 expect(modifiedState).toBe(originalState);
             }
         });
+
+        expect(spyEvent).toHaveBeenTriggered();
     });
 
 });

@@ -27,6 +27,8 @@ describe('The `toggle` method', function () {
     });
 
     it('should toggle all visible and enabled checkboxes in context', function () {
+        var spyEvent = spyOnEvent(ctx.modified, 'change');
+
         // Toggle all checkboxes in context.
         ctx.modified.checkboxes('toggle');
 
@@ -38,6 +40,8 @@ describe('The `toggle` method', function () {
                 expect(modifiedState).toBe(originalState);
             }
         });
+
+        expect(spyEvent).toHaveBeenTriggered();
     });
 
 });

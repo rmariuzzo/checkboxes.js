@@ -27,6 +27,8 @@ describe('The `check` method', function () {
     });
 
     it('should check all visible and enabled checkboxes in context', function () {
+        var spyEvent = spyOnEvent(ctx.modified, 'change');
+
         // Check all checkboxes in context.
         ctx.modified.checkboxes('check');
 
@@ -38,6 +40,8 @@ describe('The `check` method', function () {
                 expect(modifiedState).toBe(originalState);
             }
         });
+
+        expect(spyEvent).toHaveBeenTriggered();
     });
 
 });

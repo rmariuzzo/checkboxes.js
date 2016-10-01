@@ -23,7 +23,8 @@
             this.$context.find(':checkbox')
                 .filter(':not(:disabled)')
                 .filter(':visible')
-                .prop('checked', true);
+                .prop('checked', true)
+                .trigger('change');
         }
 
         /**
@@ -32,7 +33,8 @@
         uncheck() {
             this.$context.find(':checkbox:visible')
                 .filter(':not(:disabled)')
-                .prop('checked', false);
+                .prop('checked', false)
+                .trigger('change');
         }
 
         /**
@@ -44,7 +46,8 @@
                 .each((i, element) => {
                     let $checkbox = $(element);
                     $checkbox.prop('checked', !$checkbox.is(':checked'));
-                });
+                })
+                .trigger('change');
         }
 
         /**
@@ -90,7 +93,8 @@
 
                         $checkboxes.slice(start, end)
                             .filter(':not(:disabled)')
-                            .prop('checked', $checkbox.prop('checked'));
+                            .prop('checked', $checkbox.prop('checked'))
+                            .trigger('change');
                     }
                     instance.$last = $checkbox;
                 });
