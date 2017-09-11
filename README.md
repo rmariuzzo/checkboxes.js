@@ -1,6 +1,4 @@
-# checkboxes.js – v.1.2.0
-
-> A jQuery plugin that gives you nice powers over your checkboxes. http://rmariuzzo.github.io/checkboxes.js
+![checkboxes.js – A jQuery plugin that gives you nice powers over your checkboxes](banner.png)
 
 [![Build Status](https://travis-ci.org/rmariuzzo/checkboxes.js.svg?branch=develop)](https://travis-ci.org/rmariuzzo/checkboxes.js)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
@@ -8,24 +6,24 @@
 
 ## Installation
 
-#### With bower:
-
-```shell
-bower install checkboxes --save
-```
-
-#### With NPM:
+**With NPM:**
 
 ```shell
 npm install checkboxes.js --save
 ```
 
-#### Without bower:
+**With bower:**
+
+```shell
+bower install checkboxes --save
+```
+
+**Manually:**
 
  1. [Download the latest release](https://github.com/rmariuzzo/checkboxes.js/releases).
  2. Then include `jquery.checkboxes-###.min.js` just after jQuery.
 
-### Features
+## Features
 
  * **Check all** checkboxes in context.
  * **Uncheck all** checkboxes in context.
@@ -44,7 +42,7 @@ npm install checkboxes.js --save
 
 ## Want to contribute?
 
-> All help are more than welcome!
+All help are more than welcome!
 
 #### Pre-requisites
 
