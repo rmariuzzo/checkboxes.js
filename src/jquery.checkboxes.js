@@ -186,6 +186,9 @@
 
     // Register data-api listeners.
     $(document).on('click.checkboxes.data-api', '[data-toggle^=checkboxes]', dataApiClickHandler);
-    $(document).ready(dataApiDomReadyHandler);
+    $(document).on('checkboxes.data-api.ready', dataApiDomReadyHandler);
+    $(document).ready(function () {
+        $(document).trigger('checkboxes.data-api.ready');
+    });
 
 })(window.jQuery);
