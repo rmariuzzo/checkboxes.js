@@ -65,20 +65,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }, {
             key: 'max',
             value: function max(_max) {
-                var _this = this;
-
                 if (_max > 0) {
-                    (function () {
-                        // Enable max.
-                        var instance = _this;
-                        _this.$context.on('click.checkboxes.max', ':checkbox', function () {
-                            if (instance.$context.find(':checked').length === _max) {
-                                instance.$context.find(':checkbox:not(:checked)').prop('disabled', true);
-                            } else {
-                                instance.$context.find(':checkbox:not(:checked)').prop('disabled', false);
-                            }
-                        });
-                    })();
+                    // Enable max.
+                    var instance = this;
+                    this.$context.on('click.checkboxes.max', ':checkbox', function () {
+                        if (instance.$context.find(':checked').length === _max) {
+                            instance.$context.find(':checkbox:not(:checked)').prop('disabled', true);
+                        } else {
+                            instance.$context.find(':checkbox:not(:checked)').prop('disabled', false);
+                        }
+                    });
                 } else {
                     // Disable max.
                     this.$context.off('click.checkboxes.max');
@@ -94,27 +90,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }, {
             key: 'range',
             value: function range(enable) {
-                var _this2 = this;
-
                 if (enable) {
-                    (function () {
-                        var instance = _this2;
+                    var instance = this;
 
-                        _this2.$context.on('click.checkboxes.range', ':checkbox', function (event) {
-                            var $checkbox = $(event.target);
+                    this.$context.on('click.checkboxes.range', ':checkbox', function (event) {
+                        var $checkbox = $(event.target);
 
-                            if (event.shiftKey && instance.$last) {
-                                var $checkboxes = instance.$context.find(':checkbox:visible');
-                                var from = $checkboxes.index(instance.$last);
-                                var to = $checkboxes.index($checkbox);
-                                var start = Math.min(from, to);
-                                var end = Math.max(from, to) + 1;
+                        if (event.shiftKey && instance.$last) {
+                            var $checkboxes = instance.$context.find(':checkbox:visible');
+                            var from = $checkboxes.index(instance.$last);
+                            var to = $checkboxes.index($checkbox);
+                            var start = Math.min(from, to);
+                            var end = Math.max(from, to) + 1;
 
-                                $checkboxes.slice(start, end).filter(':not(:disabled)').prop('checked', $checkbox.prop('checked')).trigger('change');
-                            }
-                            instance.$last = $checkbox;
-                        });
-                    })();
+                            $checkboxes.slice(start, end).filter(':not(:disabled)').prop('checked', $checkbox.prop('checked')).trigger('change');
+                        }
+                        instance.$last = $checkbox;
+                    });
                 } else {
                     this.$context.off('click.checkboxes.range');
                 }
@@ -208,5 +200,5 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     // Register data-api listeners.
     $(document).on('click.checkboxes.data-api', '[data-toggle^=checkboxes]', dataApiClickHandler);
-    $(document).on('ready.checkboxes.data-api', dataApiDomReadyHandler);
+    $(dataApiDomReadyHandler);
 })(window.jQuery);
