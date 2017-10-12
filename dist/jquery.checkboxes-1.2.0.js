@@ -200,9 +200,5 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     // Register data-api listeners.
     $(document).on('click.checkboxes.data-api', '[data-toggle^=checkboxes]', dataApiClickHandler);
-    $(document).on('checkboxes.data-api.ready', dataApiDomReadyHandler);
-    $(function () {
-        $(document).trigger('checkboxes.data-api.ready');
-        $(document).off('checkboxes.data-api.ready');
-    });
+    $(dataApiDomReadyHandler);
 })(window.jQuery);
