@@ -1,6 +1,6 @@
 {
   "name": "checkboxes.js",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A jQuery plugin that gives you nice powers over your checkboxes.",
   "keywords": [
     "checkbox",
@@ -23,7 +23,8 @@
     "url": "https://github.com/rmariuzzo/checkboxes.js.git"
   },
   "scripts": {
-    "test": "grunt travis --verbose"
+    "test": "grunt travis --verbose",
+    "build": "grunt build"
   },
   "dependencies": {
     "jquery": "^3.3.1"
