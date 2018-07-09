@@ -1,31 +1,31 @@
 {
-    "name": "checkboxes.js",
-    "version": "1.2.0",
-    "homepage": "http://rmariuzzo.github.io/checkboxes.js/",
-    "authors": [
-        "Rubens Mariuzzo <rubens@mariuzzo.com>"
-    ],
-    "description": "A jQuery plugin that give you nice powers over your checkboxes.",
-    "main": "src/jquery.checkboxes.js",
-    "keywords": [
-        "checkbox",
-        "checkboxes",
-        "jquery",
-        "plugin",
-        "check",
-        "uncheck",
-        "range",
-        "selection"
-    ],
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "jquery": "^2.0.0"
-    }
+  "name": "checkboxes.js",
+  "version": "1.2.2",
+  "homepage": "http://rmariuzzo.github.io/checkboxes.js/",
+  "authors": [
+    "Rubens Mariuzzo <rubens@mariuzzo.com>"
+  ],
+  "description": "A jQuery plugin that give you nice powers over your checkboxes.",
+  "main": "src/jquery.checkboxes.js",
+  "keywords": [
+    "checkbox",
+    "checkboxes",
+    "jquery",
+    "plugin",
+    "check",
+    "uncheck",
+    "range",
+    "selection"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
 }
