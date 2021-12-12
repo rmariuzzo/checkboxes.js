@@ -1,4 +1,4 @@
-![checkboxes.js – A jQuery plugin that gives you nice powers over your checkboxes](banner.png)
+![checkboxes.js – A jQuery plugin that gives you nice powers over your checkboxes](.github/assets/banner.png)
 
 [![Build Status](https://travis-ci.org/rmariuzzo/checkboxes.js.svg?branch=develop)](https://travis-ci.org/rmariuzzo/checkboxes.js)
 
