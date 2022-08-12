@@ -91,3 +91,6 @@ grunt test
  - **checkboxes.js** was created by [Rubens Mariuzzo](http://github.com/rmariuzzo) with all the love in the world.
 
  - **checkboxes.js** would not have been possible without the help of: [jQuery](http://jquery.com/), [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/), [Font Awesome](http://fortawesome.github.io/Font-Awesome/), [Glyphicons](http://glyphicons.com/), [Twitter Bootstrap](http://twitter.github.io/bootstrap/) and [Subtle Patterns](http://subtlepatterns.com/). _I'm very thankful for all!_
+
+## Used by
+ - [Patchwork]([url](https://github.com/getpatchwork/patchwork))
