@@ -1,476 +1,682 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>checkboxes.js - Check, uncheck, toggle, range selection with SHIFT key, limit number of checked checkboxes and more</title>
-	<meta name="description" content="A jQuery plugin that gives you nice powers over your checkboxes such as toggling, range selection, limits and more.">
-	<link rel="stylesheet" href="bundle/bootstrap/css/bootstrap.min.css">
-	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet' type='text/css'>
-	<link rel="icon" type="image/x-icon" href="favicon.ico">
-	<link rel="stylesheet" href="bundle/fontawesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="bundle/highlight.js/styles/monokai.css">
-	<link rel="stylesheet" href="bundle/screen.css">
-	<script src="bundle/jquery/jquery-1.10.1.min.js"></script>
-	<script src="bundle/highlight.js/highlight.pack.js"></script>
-	<script src="bundle/checkboxes.js/jquery.checkboxes.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>checkboxes.js — jQuery checkbox superpowers</title>
+  <meta name="description" content="A jQuery plugin giving you check all, uncheck all, toggle, range selection, limits and more over your checkboxes.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #4f46e5;
+      --primary-dark: #4338ca;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --surface: #f8fafc;
+      --radius: 10px;
+      --font: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: #fff;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo .check { color: var(--primary); }
+
+    .nav-links { display: flex; gap: 24px; }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(160deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+      color: #fff;
+      padding: 80px 0 72px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 .check { color: #a5b4fc; }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: #c7d2fe;
+      margin-bottom: 36px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+    }
+
+    .btn-white { background: #fff; color: var(--primary); }
+    .btn-white:hover { background: #f0f0ff; }
+
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.4);
+    }
+    .btn-outline:hover { border-color: #fff; }
+
+    /* Sections */
+    section { padding: 64px 0; }
+    section + section { border-top: 1px solid var(--border); }
+    .section-alt { background: var(--surface); }
+
+    .section-header { margin-bottom: 32px; }
+    .section-header h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .section-header p { color: var(--text-muted); }
+
+    /* Install */
+    .install-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .install-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+    }
+
+    .install-card .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .install-card code {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+
+    .install-card a { color: var(--primary); text-decoration: none; }
+    .install-card a:hover { text-decoration: underline; }
+
+    /* Features */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      list-style: none;
+    }
+
+    .feature-grid li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      font-size: 0.95rem;
+    }
+
+    .feature-grid .icon {
+      color: var(--primary);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Example layout */
+    .example-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .code-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+
+    .code-label:first-child { margin-top: 0; }
+
+    pre {
+      border-radius: var(--radius);
+      overflow: hidden;
+      font-size: 0.84rem;
+      line-height: 1.6;
+    }
+
+    pre code.hljs {
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      padding: 16px 20px;
+    }
+
+    /* Demo box */
+    .demo-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .demo-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .demo-actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-demo {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: all 0.15s;
+    }
+
+    .btn-demo-primary { background: var(--primary); color: #fff; }
+    .btn-demo-primary:hover { background: var(--primary-dark); color: #fff; }
+
+    .btn-demo-secondary {
+      background: #fff;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-demo-secondary:hover { color: var(--text); border-color: #cbd5e1; }
+
+    /* Demo table */
+    .demo-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .demo-table th {
+      background: #f1f5f9;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .demo-table td {
+      padding: 7px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .demo-table tr:last-child td { border-bottom: none; }
+
+    .demo-table label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .demo-table input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .demo-table input[type="checkbox"]:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ede9fe;
+      color: var(--primary);
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      vertical-align: middle;
+    }
+
+    kbd {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 0.8em;
+      font-family: var(--mono);
+      color: var(--text);
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 48px 0;
+      margin-top: 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer-logo .check { color: #a5b4fc; }
+
+    footer p { font-size: 0.875rem; margin-top: 8px; }
+
+    footer a { color: #a5b4fc; text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* Responsive */
+    @media (max-width: 680px) {
+      .example-grid,
+      .install-grid { grid-template-columns: 1fr; }
+
+      .hero { padding: 56px 0 48px; }
+    }
+  </style>
 </head>
 <body>
-	<div class="container" id="container">
-		<div class="container">
-			<!-- Cover -->
-			<div class="row">
-				<div class="span12">
-					<div class="hero-unit">
-						<h1>checkb<i class="icon-check" id="logo-icon"></i>xes<small>.js</small></h1>
-						<p><small>TL;DR</small> &mdash; A jQuery plugin that gives you nice powers over your checkboxes.</p>
-						<p>
-							<a class="btn btn-inverse btn-large" href="http://github.com/rmariuzzo/checkboxes.js"><i class="icon-github"></i> View in GitHub</a>
-							<a class="btn btn-primary btn-large" href="http://github.com/rmariuzzo/checkboxes.js/releases/"><i class="icon-download"></i> Download <small>v1.0.7</small></a>
-						</p>
-					</div>
-				</div>
-			</div>
-			<!-- Installation -->
-			<div class="row">
-				<div class="span12">
-					<h2>Quick installation</h2>
-					<p>Using bower:</p>
-					<pre><code>bower install checkboxes.js</code></pre>
-					<p>Or <a href="http://github.com/rmariuzzo/checkboxes.js/releases/">download the latest release</a>.</p>
-				</div>
-			</div>
-			<!-- Features & Examples -->
-			<hr>
-			<div class="row">
-				<!-- Features -->
-				<div class="span6">
-					<h2>Features</h2>
-					<ul class="unstyled">
-						<li><i class="icon-ok"></i> <strong>Check all</strong> checkboxes in context</li>
-						<li><i class="icon-ok"></i> <strong>Uncheck all</strong> checkboxes in context</li>
-						<li><i class="icon-ok"></i> <strong>Toggle states</strong> of all checkboxes in context</li>
-						<li><i class="icon-ok"></i> Enable <strong>range selection</strong></li>
-						<li><i class="icon-ok"></i> <strong>Limit</strong> the number of checked checkbox per context</li>
-						<li><i class="icon-ok"></i> <strong>Data API</strong> like Twitter Bootstrap</li>
-					</ul>
-				</div>
-				<!-- Examples TOC -->
-				<div class="span6">
-					<h2>Examples <small>aka documentation</small></h2>
-					<ul class="unstyled">
-						<li>
-							<i class="icon-check"></i>
-							<a href="#checking-all-checkboxes">Checking all checkboxes in a context</a>
-						</li>
-						<li>
-							<i class="icon-check-empty"></i>
-							<a href="#unchecking-all-checkboxes">Unchecking all checkboxes in a context</a>
-						</li>
-						<li>
-							<i class="icon-check-sign"></i>
-							<a href="#toggling-all-checkboxes">Toggling all checkboxes's state in a context</a>
-						</li>
-						<li>
-							<i class="icon-sort-by-attributes"></i>
-							<a href="#range-selection-of-checkboxes">Enabling range selection of checkboxes</a>
-						</li>
-						<li>
-							<i class="icon-sort-by-order"></i>
-							<a href="#limit-max-number-of-checked-checkboxes">Limiting the number of checked checkboxes in a context</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!-- Example: Checking all checkboxes -->
-			<hr>
-			<h2 id="checking-all-checkboxes">Checking all checkboxes in context</h2>
-			<div class="row">
-				<div class="span6">
-					<p><strong>JavaScript</strong></p>
-					<pre><code>
-jQuery(function($) {
-    $('#btn-check-all').on('click', function(e) {
-        $('#table1').checkboxes('check');
-        e.preventDefault();
-    });
-});
-					</code></pre>
-					<p><strong>Data API</strong></p>
-					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
-					<pre><code>
-&lt;a href="#table1"
+
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="logo">checkb<span class="check">✓</span>xes<small style="font-size:0.75em;opacity:0.6">.js</small></a>
+      <div class="nav-links">
+        <a href="https://github.com/rmariuzzo/checkboxes.js">GitHub</a>
+        <a href="https://www.npmjs.com/package/checkboxes.js">npm</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="container">
+      <h1>checkb<span class="check">✓</span>xes<small style="font-size:0.45em;opacity:0.6;letter-spacing:0">.js</small></h1>
+      <p>A jQuery plugin giving you superpowers over your checkboxes.</p>
+      <div class="btn-group">
+        <a class="btn btn-white" href="https://github.com/rmariuzzo/checkboxes.js">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          View on GitHub
+        </a>
+        <a class="btn btn-outline" href="https://github.com/rmariuzzo/checkboxes.js/releases/">
+          Download v1.0.7
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Installation -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2>Installation</h2>
+        <p>Get started in seconds.</p>
+      </div>
+      <div class="install-grid">
+        <div class="install-card">
+          <div class="label">npm</div>
+          <code>npm install checkboxes.js</code>
+        </div>
+        <div class="install-card">
+          <div class="label">or download</div>
+          <code><a href="https://github.com/rmariuzzo/checkboxes.js/releases/">github.com/rmariuzzo/checkboxes.js/releases</a></code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2>Features</h2>
+        <p>Everything you need for checkbox management.</p>
+      </div>
+      <ul class="feature-grid">
+        <li><span class="icon">✓</span><div><strong>Check all</strong> checkboxes in a context</div></li>
+        <li><span class="icon">✓</span><div><strong>Uncheck all</strong> checkboxes in a context</div></li>
+        <li><span class="icon">✓</span><div><strong>Toggle</strong> all checkbox states in a context</div></li>
+        <li><span class="icon">✓</span><div><strong>Range selection</strong> with the SHIFT key</div></li>
+        <li><span class="icon">✓</span><div><strong>Limit</strong> the number of checked checkboxes</div></li>
+        <li><span class="icon">✓</span><div><strong>Data API</strong> — no JavaScript required</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Example: Check all -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="checking-all-checkboxes">Check all</h2>
+        <p>Check all checkboxes within a context element.</p>
+      </div>
+      <div class="example-grid">
+        <div>
+          <div class="code-label">JavaScript</div>
+          <pre><code class="language-javascript">$('#btn-check-all').on('click', function(e) {
+  $('#table1').checkboxes('check');
+  e.preventDefault();
+});</code></pre>
+          <div class="code-label">Data API</div>
+          <pre><code class="language-html">&lt;a href="#table1"
    data-toggle="checkboxes"
-   data-action="check"&gt;Check all&lt;/a&gt;
-					</code></pre>
-					<p>This will have the exact same effect as the JavaScript code.</p>
-				</div>
-				<div class="span6">
-					<p><strong>Results</strong></p>
-					<div class="well">
-						<p>
-							<a href="#table1" class="btn btn-primary" data-toggle="checkboxes" data-action="check">Check all</a>
-							<a href="#table1" class="btn btn-link" data-toggle="checkboxes" data-action="uncheck">Reset</a>
-						</p>
-						<table class="table table-bordered table-condensed table-striped" id="table1">
-							<thead>
-								<tr>
-									<th>#table1</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><label><input type="checkbox"> Row 1</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 2</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 3</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 4</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 5</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 6</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" disabled="disabled"> Row 7</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 8</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 9</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 10</label></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<!-- Example: Unchecking all checkboxes -->
-			<hr>
-			<h2 id="unchecking-all-checkboxes">Unchecking all checkboxes in context</h2>
-			<div class="row">
-				<div class="span6">
-					<p><strong>JavaScript</strong></p>
-					<pre><code>
-jQuery(function($) {
-    $('#btn-uncheck-all').on('click', function(e) {
-        $('#table2').checkboxes('uncheck');
-        e.preventDefault();
-    });
-});
-					</code></pre>
-					<p><strong>Data API</strong></p>
-					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
-					<pre><code>
-&lt;a href="#table2"
+   data-action="check"&gt;Check all&lt;/a&gt;</code></pre>
+        </div>
+        <div>
+          <div class="demo-label">Demo</div>
+          <div class="demo-box">
+            <div class="demo-actions">
+              <a href="#table1" class="btn-demo btn-demo-primary" data-toggle="checkboxes" data-action="check">Check all</a>
+              <a href="#table1" class="btn-demo btn-demo-secondary" data-toggle="checkboxes" data-action="uncheck">Reset</a>
+            </div>
+            <table class="demo-table" id="table1">
+              <thead><tr><th>#table1</th></tr></thead>
+              <tbody>
+                <tr><td><label><input type="checkbox"> Row 1</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 2</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 3</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 4</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 5</label></td></tr>
+                <tr><td><label><input type="checkbox" disabled> Row 6 <span class="badge">disabled</span></label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 7</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 8</label></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example: Uncheck all -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2 id="unchecking-all-checkboxes">Uncheck all</h2>
+        <p>Uncheck all checkboxes within a context element.</p>
+      </div>
+      <div class="example-grid">
+        <div>
+          <div class="code-label">JavaScript</div>
+          <pre><code class="language-javascript">$('#btn-uncheck-all').on('click', function(e) {
+  $('#table2').checkboxes('uncheck');
+  e.preventDefault();
+});</code></pre>
+          <div class="code-label">Data API</div>
+          <pre><code class="language-html">&lt;a href="#table2"
    data-toggle="checkboxes"
-   data-action="uncheck"&gt;Uncheck all&lt;/a&gt;
-					</code></pre>
-					<p>This will have the exact same effect as the JavaScript code.</p>
-				</div>
-				<div class="span6">
-					<p><strong>Results</strong></p>
-					<div class="well">
-						<p>
-							<a href="#table2" class="btn btn-primary" data-toggle="checkboxes" data-action="uncheck">Uncheck all</a>
-							<a href="#table2" class="btn btn-link" data-toggle="checkboxes" data-action="check">Reset</a>
-						</p>
-						<table class="table table-bordered table-condensed table-striped" id="table2">
-							<thead>
-								<tr>
-									<th>#table2</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 1</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 2</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 3</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 4</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 5</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 6</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked" disabled="disabled"> Row 7</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 8</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 9</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 10</label></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<!-- Example: Toggling all checkboxes's state -->
-			<hr>
-			<h2 id="toggling-all-checkboxes">Toggling all checkboxes's state in context</h2>
-			<div class="row">
-				<div class="span6">
-					<p><strong>JavaScript</strong></p>
-					<pre><code>
-jQuery(function($) {
-    $('#btn-toggle').on('click', function(e) {
-        $('#table3').checkboxes('toggle');
-        e.preventDefault();
-    });
-});
-					</code></pre>
-					<p><strong>Data API</strong></p>
-					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
-					<pre><code>
-&lt;a href="#table3"
+   data-action="uncheck"&gt;Uncheck all&lt;/a&gt;</code></pre>
+        </div>
+        <div>
+          <div class="demo-label">Demo</div>
+          <div class="demo-box">
+            <div class="demo-actions">
+              <a href="#table2" class="btn-demo btn-demo-primary" data-toggle="checkboxes" data-action="uncheck">Uncheck all</a>
+              <a href="#table2" class="btn-demo btn-demo-secondary" data-toggle="checkboxes" data-action="check">Reset</a>
+            </div>
+            <table class="demo-table" id="table2">
+              <thead><tr><th>#table2</th></tr></thead>
+              <tbody>
+                <tr><td><label><input type="checkbox" checked> Row 1</label></td></tr>
+                <tr><td><label><input type="checkbox" checked> Row 2</label></td></tr>
+                <tr><td><label><input type="checkbox" checked> Row 3</label></td></tr>
+                <tr><td><label><input type="checkbox" checked> Row 4</label></td></tr>
+                <tr><td><label><input type="checkbox" checked> Row 5</label></td></tr>
+                <tr><td><label><input type="checkbox" checked disabled> Row 6 <span class="badge">disabled</span></label></td></tr>
+                <tr><td><label><input type="checkbox" checked> Row 7</label></td></tr>
+                <tr><td><label><input type="checkbox" checked> Row 8</label></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example: Toggle -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="toggling-all-checkboxes">Toggle</h2>
+        <p>Toggle the state of all checkboxes within a context element.</p>
+      </div>
+      <div class="example-grid">
+        <div>
+          <div class="code-label">JavaScript</div>
+          <pre><code class="language-javascript">$('#btn-toggle').on('click', function(e) {
+  $('#table3').checkboxes('toggle');
+  e.preventDefault();
+});</code></pre>
+          <div class="code-label">Data API</div>
+          <pre><code class="language-html">&lt;a href="#table3"
    data-toggle="checkboxes"
-   data-action="toggle"&gt;Toggle all&lt;/a&gt;
-					</code></pre>
-					<p>This will have the exact same effect as the JavaScript code.</p>
-				</div>
-				<div class="span6">
-					<p><strong>Results</strong></p>
-					<div class="well">
-						<p>
-							<a href="#table3" class="btn btn-primary" data-toggle="checkboxes" data-action="toggle">Toggle all</a>
-						</p>
-						<table class="table table-bordered table-condensed table-striped" id="table3">
-							<thead>
-								<tr>
-									<th>#table3</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><label><input type="checkbox"> Row 1</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 2</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 3</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 4</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 5</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" disabled="disabled" checked="checked"> Row 6</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" disabled="disabled"> Row 7</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 8</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 9</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" checked="checked"> Row 10</label></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<!-- Example: Enabling range selection of checkboxes -->
-			<hr>
-			<h2 id="range-selection-of-checkboxes">Enabling range selection of checkboxes</h2>
-			<p><em>Range selection</em> is a feature that allow checking a range of checkboxes by checking the first checkbox as the starting point, then while pressing the <code>SHIFT</code> key checking another checkbox that will be the ending of the range, and all checkboxes between will be checked.</p>
-			<div class="row">
-				<div class="span6">
-					<p><strong>JavaScript</strong></p>
-					<pre><code>
-jQuery(function($) {
-    $('#table4').checkboxes('range', true);
-});
-					</code></pre>
-					<p><strong>Data API</strong></p>
-					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
-					<pre><code>
-&lt;div data-toggle="checkboxes"
+   data-action="toggle"&gt;Toggle all&lt;/a&gt;</code></pre>
+        </div>
+        <div>
+          <div class="demo-label">Demo</div>
+          <div class="demo-box">
+            <div class="demo-actions">
+              <a href="#table3" class="btn-demo btn-demo-primary" data-toggle="checkboxes" data-action="toggle">Toggle all</a>
+            </div>
+            <table class="demo-table" id="table3">
+              <thead><tr><th>#table3</th></tr></thead>
+              <tbody>
+                <tr><td><label><input type="checkbox"> Row 1</label></td></tr>
+                <tr><td><label><input type="checkbox" checked> Row 2</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 3</label></td></tr>
+                <tr><td><label><input type="checkbox" checked> Row 4</label></td></tr>
+                <tr><td><label><input type="checkbox" disabled checked> Row 5 <span class="badge">disabled</span></label></td></tr>
+                <tr><td><label><input type="checkbox" disabled> Row 6 <span class="badge">disabled</span></label></td></tr>
+                <tr><td><label><input type="checkbox" checked> Row 7</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 8</label></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example: Range selection -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <h2 id="range-selection-of-checkboxes">Range selection</h2>
+        <p>Check a range of checkboxes: check the first, then hold <kbd>SHIFT</kbd> and check another to select all in between.</p>
+      </div>
+      <div class="example-grid">
+        <div>
+          <div class="code-label">JavaScript</div>
+          <pre><code class="language-javascript">$('#table4').checkboxes('range', true);</code></pre>
+          <div class="code-label">Data API</div>
+          <pre><code class="language-html">&lt;div data-toggle="checkboxes"
      data-range="true"&gt;
-	 ...
-	 &lt;-- set of checkboxes --&gt;
-	 ...
-&lt;/div&gt;
-					</code></pre>
-					<p>This will have the exact same effect as the JavaScript code.</p>
-				</div>
-				<div class="span6">
-					<p><strong>Results</strong></p>
-					<div class="well">
-						<table class="table table-bordered table-condensed table-striped" id="table4"
-							data-toggle="checkboxes"
-							data-range="true">
-							<thead>
-								<tr>
-									<th>#table4</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><label><input type="checkbox"> Row 1</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 2 <small>(check me)</small></label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 3</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 4</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox" disabled="disabled"> Row 5</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 6</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 7 <small>(now pressing SHIFT and check </small></label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 8</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 9</label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 10</label></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<!-- Example: Limiting the number of checked checkboxes in a context -->
-			<hr>
-			<h2 id="limit-max-number-of-checked-checkboxes">Limiting the number of checked checkboxes in a context</h2>
-			<p>Often, it is useful to limit the number of checkboxes that can be checked within a context.</p>
-			<div class="row">
-				<div class="span6">
-					<p><strong>JavaScript</strong></p>
-					<pre><code>
-jQuery(function($) {
-    $('#table5').checkboxes('max', 3);
-});
-					</code></pre>
-					<p><strong>Data API</strong></p>
-					<p>The following snippet is the equivalent form of the previous JavaScipt code rewritten with the data API.</p>
-					<pre><code>
-&lt;div data-toggle="checkboxes"
+  ...
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <div class="demo-label">Demo — try SHIFT+click</div>
+          <div class="demo-box">
+            <table class="demo-table" id="table4" data-toggle="checkboxes" data-range="true">
+              <thead><tr><th>#table4</th></tr></thead>
+              <tbody>
+                <tr><td><label><input type="checkbox"> Row 1</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 2 <span class="badge">start here</span></label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 3</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 4</label></td></tr>
+                <tr><td><label><input type="checkbox" disabled> Row 5 <span class="badge">disabled</span></label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 6</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 7 <span class="badge">shift+click here</span></label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 8</label></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example: Limit -->
+  <section class="section-alt">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="limit-max-number-of-checked-checkboxes">Limit</h2>
+        <p>Limit the maximum number of checkboxes that can be checked within a context.</p>
+      </div>
+      <div class="example-grid">
+        <div>
+          <div class="code-label">JavaScript</div>
+          <pre><code class="language-javascript">$('#table5').checkboxes('max', 3);</code></pre>
+          <div class="code-label">Data API</div>
+          <pre><code class="language-html">&lt;div data-toggle="checkboxes"
      data-max="3"&gt;
-	 ...
-	 &lt;-- set of checkboxes --&gt;
-	 ...
-&lt;/div&gt;
-					</code></pre>
-					<p>This will have the exact same effect as the JavaScript code.</p>
-				</div>
-				<div class="span6">
-					<p><strong>Results</strong></p>
-					<div class="well">
-						<table class="table table-bordered table-condensed table-striped" id="table5"
-							data-toggle="checkboxes"
-							data-max="3">
-							<thead>
-								<tr>
-									<th>#table5</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><label><input type="checkbox"> Row 1</td></label>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 2</td></label>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 3</td></label>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 4 <small>(if you check the first three, you won't be able to check me)</small></label></td>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 5</td></label>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 6</td></label>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 7</td></label>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 8</td></label>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 9</td></label>
-								</tr>
-								<tr>
-									<td><label><input type="checkbox"> Row 10</td></label>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Footer -->
-	<footer class="container">
-		<div class="row">
-			<div class="span6">
-				<h1>checkb<i class="icon-check"></i>xes<small>.js</small></h1>
-				<p>was created by <a href="http://github.com/rmariuzzo">rmariuzzo</a> with all the love in the world</p>
-			</div>
-			<div class="span6">
-				<br>
-				<p>checkb<i class="icon-check"></i>xes<small>.js</small> would not have been possible without the help of: <a href="http://jquery.com/">jQuery</a>, <a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a>, <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a>, <a href="http://glyphicons.com/">Glyphicons</a>, <a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a> and <a href="http://subtlepatterns.com/">Subtle Patterns</a>. <em>I'm very thankful for all!</em></p>
-			</div>
-		</div>
-	</footer>
-	<script>
-		jQuery(function($) {
-			$('pre > code').each(function() {
-				var $code = $(this);
-				$code.text($.trim($code.text()));
-			});
-			hljs.initHighlightingOnLoad();
-		})
-	</script>
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ...
+&lt;/div&gt;</code></pre>
+        </div>
+        <div>
+          <div class="demo-label">Demo — max 3 selections</div>
+          <div class="demo-box">
+            <table class="demo-table" id="table5" data-toggle="checkboxes" data-max="3">
+              <thead><tr><th>#table5 <span class="badge">max 3</span></th></tr></thead>
+              <tbody>
+                <tr><td><label><input type="checkbox"> Row 1</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 2</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 3</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 4</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 5</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 6</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 7</label></td></tr>
+                <tr><td><label><input type="checkbox"> Row 8</label></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	  ga('create', 'UA-1965431-11', 'rmariuzzo.github.io');
-	  ga('send', 'pageview');
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <a href="#" class="footer-logo">checkb<span class="check">✓</span>xes<small style="font-size:0.7em;opacity:0.5">.js</small></a>
+        <p>Created by <a href="https://github.com/rmariuzzo">rmariuzzo</a> with ♥</p>
+      </div>
+      <p style="max-width:380px">Made possible with <a href="https://jquery.com/">jQuery</a>, <a href="https://highlightjs.org/">Highlight.js</a>, and <a href="https://fonts.google.com/">Google Fonts</a>.</p>
+    </div>
+  </footer>
 
-	</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="bundle/checkboxes.js/jquery.checkboxes.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
