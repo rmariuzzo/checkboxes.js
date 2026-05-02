@@ -1,25 +1,14 @@
-![checkboxes.js – A jQuery plugin that gives you nice powers over your checkboxes](banner.png)
+![checkboxes.js – A jQuery plugin that gives you nice powers over your checkboxes](banner.png)
 
-[![Build Status](https://travis-ci.org/rmariuzzo/checkboxes.js.svg?branch=develop)](https://travis-ci.org/rmariuzzo/checkboxes.js)
+[![CI](https://github.com/rmariuzzo/checkboxes.js/actions/workflows/ci.yml/badge.svg)](https://github.com/rmariuzzo/checkboxes.js/actions/workflows/ci.yml)
 
 ## Installation
 
-**With NPM:**
-
 ```shell
-npm install checkboxes.js --save
+npm install checkboxes.js
 ```
 
-**With bower:**
-
-```shell
-bower install checkboxes --save
-```
-
-**Manually:**
-
- 1. [Download the latest release](https://github.com/rmariuzzo/checkboxes.js/releases).
- 2. Then include `jquery.checkboxes-###.min.js` just after jQuery.
+Or download the latest release from [`dist/`](dist/) and include `jquery.checkboxes-###.min.js` just after jQuery.
 
 ## Features
 
@@ -27,7 +16,7 @@ bower install checkboxes --save
  * **Uncheck all** checkboxes in context.
  * **Toggle states** of all checkboxes in context.
  * Enable **range selection**.
- * **Limit** the number of checked checkbox per context.
+ * **Limit** the number of checked checkboxes per context.
  * **Data API** like Twitter Bootstrap.
 
 ### Documentation and examples
@@ -40,57 +29,59 @@ bower install checkboxes --save
 
 ## Want to contribute?
 
-All help are more than welcome!
+All help is more than welcome!
 
 #### Pre-requisites
 
- - [node.js](http://nodejs.org/).
- - [Grunt](http://gruntjs.com/).
- - [Bower](http://bower.io/).
+ - [Node.js](https://nodejs.org/) ≥ 20
 
 #### Development Workflow
 
- 1. **[Fork](https://github.com/rmariuzzo/checkboxes.js/fork)** this respository.
- 2. **Clone** your fork and create a feature branch from develop.
+ 1. **[Fork](https://github.com/rmariuzzo/checkboxes.js/fork)** this repository.
+ 2. **Clone** your fork and create a feature branch.
 
     ```shell
     git clone git@github.com:<your-username>/checkboxes.js.git
-    git fetch origin
-    git checkout develop
+    cd checkboxes.js
     git checkout -b feature-<super-power>
     ```
 
- 3. **Install** development dependencies.
+ 3. **Install** dependencies.
 
     ```shell
     npm install
-    bower install
     ```
 
  4. **Code** and be happy!
- 5. **Test** your code (run `grunt` to watch JS files and execute the test specs).
- 6. When everything is in good shape prepare the distribution files (run `grunt build`).
+ 5. **Lint and test** your code.
+
+    ```shell
+    npm run lint
+    npm test
+    ```
+
+ 6. **Build** the distribution files.
+
+    ```shell
+    npm run build
+    ```
+
  7. Submit a **pull request** and grab popcorn.
 
 Questions? [Hit me](https://github.com/rmariuzzo/).
 
-#### ProTip:
-
-> When coding run `grunt`, this will watch for any change in source and test files, then it will lint and test your code as you code.
-
 ## Tests
 
-To run all tests:
-
 ```shell
-grunt test
+npm test
 ```
 
 ### Credits
 
  - **checkboxes.js** was created by [Rubens Mariuzzo](http://github.com/rmariuzzo) with all the love in the world.
 
- - **checkboxes.js** would not have been possible without the help of: [jQuery](http://jquery.com/), [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/), [Font Awesome](http://fortawesome.github.io/Font-Awesome/), [Glyphicons](http://glyphicons.com/), [Twitter Bootstrap](http://twitter.github.io/bootstrap/) and [Subtle Patterns](http://subtlepatterns.com/). _I'm very thankful for all!_
+ - **checkboxes.js** would not have been possible without: [jQuery](http://jquery.com/), [Highlight.js](http://softwaremaniacs.org/soft/highlight/en/), [Font Awesome](http://fortawesome.github.io/Font-Awesome/), [Glyphicons](http://glyphicons.com/), [Twitter Bootstrap](http://twitter.github.io/bootstrap/) and [Subtle Patterns](http://subtlepatterns.com/).
 
 ## Used by
- - [Patchwork]([url](https://github.com/getpatchwork/patchwork))
+
+ - [Patchwork](https://github.com/getpatchwork/patchwork)
