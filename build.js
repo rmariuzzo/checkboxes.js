@@ -2,7 +2,7 @@
 
 const { transformFileSync } = require('@babel/core');
 const { minify } = require('terser');
-const { writeFileSync, rmSync, mkdirSync } = require('fs');
+const { writeFileSync, rmSync, mkdirSync, copyFileSync, readFileSync } = require('fs');
 const pkg = require('./package.json');
 
 async function build() {
@@ -20,6 +20,14 @@ async function build() {
 
     console.log(`Built dist/jquery.checkboxes-${pkg.version}.js`);
     console.log(`Built dist/jquery.checkboxes-${pkg.version}.min.js`);
+
+    copyFileSync(`dist/jquery.checkboxes-${pkg.version}.min.js`, 'docs/bundle/checkboxes.js/jquery.checkboxes.min.js');
+    console.log(`Updated docs/bundle/checkboxes.js/jquery.checkboxes.min.js`);
+
+    const html = readFileSync('docs/index.html', 'utf-8');
+    const updatedHtml = html.replace(/Download v[\d.]+/g, `Download v${pkg.version}`);
+    writeFileSync('docs/index.html', updatedHtml);
+    console.log(`Updated docs/index.html → Download v${pkg.version}`);
 }
 
 build().catch((err) => {

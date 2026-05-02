@@ -27,6 +27,7 @@
   },
   "scripts": {
     "build": "node build.js",
+    "version": "npm run build && git add dist/ docs/bundle/checkboxes.js/jquery.checkboxes.min.js docs/index.html",
     "lint": "eslint src tests/specs",
     "test": "jest"
   },
