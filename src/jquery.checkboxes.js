@@ -156,10 +156,10 @@
      *
      * @param {Object} event Click event.
      */
-    var dataApiClickHandler = (event) => {
-        var el = $(event.target);
-        var href = el.attr('href');
-        var $context = $(el.data('context') || (href && href.replace(/.*(?=#[^\s]+$)/, '')));
+    const dataApiClickHandler = (event) => {
+        const el = $(event.target);
+        const href = el.attr('href');
+        const $context = $(el.data('context') || (href && href.replace(/.*(?=#[^\s]+$)/, '')));
         var action = el.data('action');
 
         if ($context && action) {
@@ -173,7 +173,7 @@
     /**
      * Handle data-api DOM ready.
      */
-    var dataApiDomReadyHandler = () => {
+    const dataApiDomReadyHandler = () => {
         $('[data-toggle^=checkboxes]').each(function () {
             let el = $(this);
             let actions = el.data();
